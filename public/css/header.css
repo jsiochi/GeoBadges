@@ -1,0 +1,13 @@
+.navbar {
+    position: fixed;
+    width: 100%;
+    min-height: 40px;
+    background: rgba(200,200,200,0.7);
+}
+
+.nav-container {
+    height: 40px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+

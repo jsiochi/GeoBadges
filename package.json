@@ -1,0 +1,9 @@
+{
+    "name": "geobadges",
+    "main": "index.js",
+    "dependencies": {
+        "express" : "^4.10.6",
+        "body-parser" : "^1.4.2",
+        "method-override" : "^2.3.0"
+    }
+}
