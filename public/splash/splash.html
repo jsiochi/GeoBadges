@@ -1,38 +1,103 @@
-<div class="container">
-            <div class="row text-center">
-                <h1 class="">Some Cool Header Text About GeoBadges</h1>
-            </div>
-            <div class="row text-center" style="min-height: 400px">
-                Some cool VIDEO
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    Way to get involved 1
-                </div>
-                <div class="col-md-4 text-center">
-                    Way to get involved 2
-                </div>
-                <div class="col-md-4 text-center">
-                    Way to get involved 3
-                </div>
-            </div>
-            <div class="row" style="background: #444; height: 5px">
-            </div>
-            <div class="row">
-                Bunch of filler text, like the kind of filler you put in tacos. Limes and cilantro, slow-cooked pork and onions. With a double corn tortilla. It will taste so good. Cilantro tastes like soap to some people and apparently that's a genetic factor. But that's enough for now, because I am listening to Belle & Sebastian, which is a band from Scotland. Scotch whisky is also from Scotland, so you know they must be good. Although Japanese whisky has possibly gotten better than Scotch. The Yamazaki single malts sherry cask 2013 year was named the best scotch of the year.
-            </div>
-            <div class="row" style="background: #444; height: 5px">
-            </div>
-            <div class="row text-center">
-                <h4>Geo Badges is a collaborative effort supported by:</h4>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 text-center">Supporter 1</div>
-                <div class="col-lg-3 text-center">Supporter 2</div>
-                <div class="col-lg-3 text-center">Supporter 3</div>
-                <div class="col-lg-3 text-center">Supporter 4</div>
-            </div>
-            <div class="row text-center">
-                Website design and copyright!
+<div ng-include src="'header/header.html'"></div>
+
+<div class="container-fluid" style="background-color: #FFF">
+    <div class="container">
+        <div class="row text-center video-box" style="min-height: 400px">
+            <div class="col-md-12">
+                <iframe src="//player.vimeo.com/video/21280648" width="820" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<!--                <p><a href="http://vimeo.com/21280648">Washington DC time lapse</a> from <a href="http://vimeo.com/richardbentley">Richard Bentley</a> on <a href="https://vimeo.com">Vimeo</a>.</p>-->
             </div>
         </div>
+        <div class="page-line"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center">
+                    GeoBadges is an open educational resource that helps teachers use mapping and mapstorytelling activities to drive student learning. It is convened by the American Geographical Society and sustained by a <a href="#">community of partners.</a>
+                </h3>
+            </div>
+        </div>
+        <div class="page-line"></div>
+        <div class="row btn-row">
+            <div class="col-md-4 text-center">
+                <div class="btn btn-default">Totally new to maps? Here's a 101.</div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="btn btn-default">Looking for tools to use? Check out these snapshots.</div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="btn btn-default">Looking for lessons? Explore our pathways and earn open badges.</div>
+            </div>
+        </div>
+        <div class="page-line"></div>
+        <div class="row">
+            <div class="col-lg-6 right-border">
+                <h4 class="text-center">Featured Tool Snapshots</h4>
+                <div class="row">
+                    <div class="col-md-4"><img class="img-responsive" src="../images/mapstory.png"></div>
+                    <div class="col-md-8"><h5><strong>MapStory</strong></h5>MapStory is the global data commons for mapping geographic change over time.</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><img class="img-responsive" src="../images/mapmag.jpg"></div>
+                    <div class="col-md-8"><h5><strong>OpenStreetMap</strong></h5>OpenStreetMap is the free and editable base map of the world.</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><img class="img-responsive" src="../images/storymapjs.jpg"></div>
+                    <div class="col-md-8"><h5><strong>StoryMapJS</strong></h5>StoryMapJS is a tool for creating and animating push-pin maps as dynamic slide presentations.</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4 class="text-center">Featured Lesson Pathways</h4>
+                <div class="row">
+                    <div class="col-md-4"><img class="img-responsive" src="../images/mapmag.jpg"></div>
+                    <div class="col-md-8"><h5><strong>Dummy 1</strong></h5>This pathway helps us do things that are cool.</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><img class="img-responsive" src="../images/mapmag.jpg"></div>
+                    <div class="col-md-8"><h5><strong>Dummy 2</strong></h5>This pathway helps us do things that are cool.</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><img class="img-responsive" src="../images/mapmag.jpg"></div>
+                    <div class="col-md-8"><h5><strong>Dummy 3</strong></h5>This pathway helps us do things that are cool.</div>
+                </div>
+            </div>
+        </div>
+        <div class="page-line"></div>
+        
+        <div class="row">
+            <h2 class="text-center">Partners & Sponsors</h2>
+            <div class="col-md-2">
+                <img class="img-responsive" src="../images/mapstory.png">
+            </div>
+            <div class="col-md-2">
+                <img class="img-responsive" src="../images/GeoMakers.jpg">
+            </div>
+            <div class="col-md-2">
+                <img class="img-responsive" src="../images/mapmag.jpg">
+            </div>
+            <div class="col-md-2">
+                <img class="img-responsive" src="../images/usgif.jpg">
+            </div>
+            <div class="col-md-2">
+                <img class="img-responsive" src="../images/longview.png">
+            </div>
+            <div class="col-md-2">
+                <img class="img-responsive" src="../images/thatclasslogo.jpg">
+            </div>
+        </div>
+        
+        <div class="page-line"></div>
+        
+        <div class="row">
+            <div class="col-md-4 text-center">Contact</div>
+            <div class="col-md-4 text-center">
+                Twitter // Facebook
+<!--                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+            </div>
+            <div class="col-md-4 text-center">Sponsor</div>
+        </div>
+        
+        <div class="row text-center footer">
+            Website design and copyright! Jeremiah Siochi
+        </div>
+    </div>
+</div>

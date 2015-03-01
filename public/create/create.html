@@ -1,0 +1,35 @@
+<div class="container-fluid" style="height: 800px" ng-controller="CreateController as creator">
+    <div class="row" id="waypoint-nav">
+        <!-- Should the current waypoint be refactored into the route? e.g. /create/:pathwayId/:waypoint, then view switching based on the route stateParams is natural -->
+        <div ng-click="creator.currentWaypoint = waypoint.index" ng-repeat="waypoint in creator.waypoints">
+            {{waypoint.text}}
+        </div>
+        <div ng-click="creator.addWaypoint()">Add Waypoint +</div>
+    </div>
+    <div class="row">
+        <div ng-if="creator.currentWaypoint === 0">
+            <h2>Metadata</h2>
+            <input type="text" ng-model="creator.pathway.title" placeholder="Pathway Title"/>
+            <input type="text" ng-model="creator.pathway.description" placeholder="One Sentence Description"/>
+            <input type="text" ng-model="creator.pathway.longDescription" placeholder="Longer Description"/>
+            <input type="text" ng-model="creator.pathway.authorNotes" placeholder="Author's Notes"/>
+            <input type="text" ng-model="creator.pathway.materials" placeholder="Materials/Requirements"/>
+            <select ng-model="creator.targetGrade" ng-options="grade.desc for grade in creator.gradeList">
+                <option value="">Target Grade</option>
+            </select>
+            <select ng-model="creator.subjectArea" ng-options="subject for subject in creator.subjectList">
+                <option value="">Subject Area</option>
+            </select>
+            <select ng-model="creator.learningEnv" ng-options="env for env in creator.learningEnvList">
+                <option value="">Learning Evironment</option>
+            </select>
+            <input ng-model="creator.standards" type="text" placeholder="Standards"/>
+        </div>
+        <!-- This is pretty bad, man. I should probably fix the scoping -->
+        <div ng-if="creator.currentWaypoint > 0">
+            <h2>{{creator.waypoints[creator.currentWaypoint].text}}</h2>
+            <textarea ng-model="creator.waypoints[creator.currentWaypoint].content" class="form-control" rows="10">
+            </textarea>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,63 @@
-.navbar {
-    position: fixed;
-    width: 100%;
-    min-height: 40px;
-    background: rgba(200,200,200,0.7);
-}
-
 .nav-container {
-    height: 40px;
-    padding-right: 0px;
-    padding-left: 0px;
+    /*position: fixed;*/
 }
 
+/*
+.nav-container {
+    text-align: center;
+}
+
+.nav-container ul { display: inline-block; }*/
+
+.nav-container h1 {
+    margin-top: 0px
+}
+
+.nav-container h4 {
+    width: 200px;
+    font-family: cursive;
+    font-size: 20px;
+}
+
+.nav-container img {
+    max-width: 150%;
+    margin-top: 2px;
+}
+
+.nav-pills {
+    display: inline-block;
+    padding-top: 5px;
+}
+
+.nav-pills li.active > a {
+    background-color: transparent;
+    color: black;
+}
+
+.nav-pills li.active > a:focus, .nav-pills li.active > a:hover {
+    background-color: transparent;
+    color: #aaa;
+}
+
+.nav-pills > li > a {
+/*    color: white;*/
+    color: black;
+}
+
+.nav-pills > li > a:hover, .nav-pills > li > a:focus {
+    background-color: transparent;
+    border-radius: 0px;
+    color: #aaa;
+}
+
+.nav-pills > li + li {
+    margin-left: 0px;
+}
+
+#contribute-tab {
+    margin-left: 77px;
+}
+
+#contact-tab {
+    margin-left: 13px;
+}

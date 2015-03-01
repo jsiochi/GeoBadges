@@ -6,14 +6,20 @@
         <title>GeoBadges</title>
         <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
         
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic' rel='stylesheet' type='text/css'>
+        
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/header.css" rel="stylesheet">
+        <link href="css/create.css" rel="stylesheet">
         
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
-        <script src="components/badge-service.js"></script>
-        <script src="explore/explore.js"></script>
+        <script src="vendor/angular-ui-router.js"></script>
         <script src="app.js"></script>
+        <script src="components/badge-service.js"></script>
+        <script src="service/pathway.service.js"></script>
+        <script src="create/create.controller.js"></script>
+        <script src="explore/explore.js"></script>
 <!--        <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>-->
 <!--        <script src="js/bootstrap.min.js"></script>-->
         
@@ -23,10 +29,6 @@
         <![endif]-->
     </head>
     <body>
-        <div ng-include src="'header/header.html'"></div>
-        
-        <div ng-include src="'splash/splash.html'"></div>
-        
-        <div ng-include src="'explore/explore.html'"></div>
+        <div ui-view></div>
     </body>
 </html>
