@@ -6,7 +6,8 @@ angular.module('app', [
     'app.service', 
     'app.explore',
     'app.create',
-    'ui.router'
+    'ui.router',
+    'ngTagsInput'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 //    $urlRouterProvider.otherwise('');
@@ -22,5 +23,9 @@ angular.module('app', [
     .state('create.detail', {
         url: '/:pathway_id',
         templateUrl: 'create/create.html'
+    })
+    .state('explore', {
+        url: '/explore',
+        templateUrl: 'explore/explore.html'
     });
 });

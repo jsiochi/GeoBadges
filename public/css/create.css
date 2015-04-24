@@ -1,4 +1,84 @@
+/*
 .waypoint-content {
     width: 90%;
     height: 200px;
+}*/
+
+.waypoint {
+    display: inline-block;
+    width: 100px;
+    margin: 10px 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.waypoint-active {
+    color: #337ab7;
+}
+
+.pathway-container {
+    width: 90%;
+    display: inline-block;
+}
+
+.pathway-img {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+
+.pathway-img-lg {
+    width: 200px;
+    margin: 20px 0px;
+}
+
+#waypoint-nav {
+    margin-top: 20px;
+}
+
+.create-header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add-waypoint {
+
+}
+
+.rm-waypoint {
+    cursor: pointer;
+    margin-top: 12px;
+    display: inline-block;
+}
+
+.glyphicon-minus {
+    margin-right: 5px;
+}
+
+.badge-file {
+    display: inline-block !important;
+    position: relative;
+    left: 55px;
+}
+
+.badge-container {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.badge-form {
+    margin-top: 60px;
+}
+
+.pathway-action {
+    display: inline-block;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+.pathway-summary {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
 }

@@ -1,14 +1,18 @@
-angular.module('app.create').
-    controller('CreateController', CreateController);
+angular.module('app.create')
+    .controller('CreateController', CreateController);
 
-CreateController.$inject = ['pathwayService', '$stateParams', '$state'];
+CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state'];
 
-function CreateController(pathwayService, $stateParams, $state) {
+function CreateController(pathwayService, badgeService, $stateParams, $state) {
     var vm = this;
     
     console.log($stateParams);
     
     vm.pathway = {};
+    
+    vm.onMetadata = 1;
+    
+    vm.tmpImage = undefined;
     
     function indexWaypoints(points) {
         var j = 0;
@@ -17,29 +21,82 @@ function CreateController(pathwayService, $stateParams, $state) {
         }
     }
     
-    if(angular.isDefined($stateParams.pathway_id) && $stateParams.pathway_id !== null) {
+    if(angular.isDefined($stateParams.pathway_id) && $stateParams.pathway_id !== null && $stateParams.pathway_id !== "") {
         pathwayService.getPathway($stateParams.pathway_id).success(function(response) {
             console.log(response);
             vm.pathway = response;
             vm.waypoints = vm.pathway.waypoints;
-            vm.waypoints.unshift({text: 'Overview', text: 'Metadata'});
+            //should move indexing out - already taken care of by creation
             indexWaypoints(vm.waypoints);
+            
+            if(angular.isDefined(vm.pathway.badge)) {
+                badgeService.getBadge(vm.pathway.badge).success(function(response) {
+                    console.log(response);
+                    vm.badgeImage = response.data.image_url;
+                });
+            }
         });
     } else {
-        vm.waypoints = [{text: 'Overview', text: 'Metadata', index: 0}];
+        vm.waypoints = [];
     }
     
     vm.addWaypoint = function () {
         var number = vm.waypoints.length;
-        vm.waypoints.push({text: 'Waypoint ' + number, content: 'NEW WAYPOINT ' + number + ' filler text', index: number});
-        if(number === 1 && $state.is('create')) {
-            pathwayService.makePathway(vm.pathway).success(function(response) {
+        console.log(number);
+        vm.waypoints.push({text: 'Waypoint ' + (number + 1), content: '', index: number});
+        vm.currentWaypoint = number;
+        vm.onMetadata = false;
+        vm.savePathway();
+    };
+    
+    vm.deleteWaypoint = function (waypointIndex) {
+        vm.waypoints.splice(waypointIndex, 1);
+        indexWaypoints(vm.waypoints);
+        if(vm.currentWaypoint >= vm.waypoints.length && vm.waypoints.length > 0) {
+            vm.currentWaypoint = vm.currentWaypoint - 1;
+        }
+        if(vm.waypoints.length === 0) {
+            vm.onMetadata = true;
+        }
+        vm.savePathway();
+    };
+    
+    vm.createBadge = function () {
+        var formData = new FormData();
+        formData.append('file', vm.myFile);
+        formData.append('title', vm.pathway.title);
+        formData.append('short_description', vm.pathway.description);
+        formData.append('description', vm.pathway.longDescription);
+        formData.append('categories', tagsToList(vm.pathway.tags));
+        
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            vm.badgeImage = e.target.result;
+            console.log(vm.badgeImage);
+        };
+        
+        reader.readAsDataURL(vm.myFile);
+        
+        if(angular.isDefined(vm.pathway.badge)) {
+            badgeService.updateBadge(vm.pathway.badge, formData).error(function(message) {
+                console.log(message);
+            }).success(function(response) {
+                console.log('got response: ');
                 console.log(response);
-                $state.go('create.detail', {pathway_id: response._id});
+                //vm.pathway.badge = JSON.parse(response).data;
+                console.log(vm.pathway.badge);
+                vm.savePathway();
             });
         } else {
-            pathwayService.savePathway($stateParams.pathway_id, vm.pathway).success(function(response) {
+            badgeService.createBadge(formData).error(function(message) {
+                console.log(message);
+            }).success(function(response) {
+                console.log('got response: ');
                 console.log(response);
+                vm.pathway.badge = JSON.parse(response).data;
+                console.log(vm.pathway.badge);
+                vm.savePathway();
             });
         }
     };
@@ -57,4 +114,40 @@ function CreateController(pathwayService, $stateParams, $state) {
     vm.learningEnvList = ['Inside', 'Outside', 'Individual', 'Small Group', 'Whole Class'];
     
     vm.standardList = ['1', '2', '3', '4', '5'];
-} 
+    
+    vm.savePathway = function () {
+        if(vm.currentWaypoint === 0 && $state.is('create')) {
+            pathwayService.makePathway(vm.pathway).success(function(response) {
+                console.log(response);
+                $state.go('create.detail', {pathway_id: response._id});
+            });
+        } else {
+            vm.pathway.waypoints = vm.waypoints;
+            pathwayService.savePathway($stateParams.pathway_id, vm.pathway).success(function(response) {
+                console.log(response);
+            });
+        }
+    };
+    
+    vm.badgeButtonText = function () {
+        if(angular.isDefined(vm.pathway.badge)) {
+            return "Change Badge Image";
+        } else {
+            return "Create Badge";
+        }
+    };
+    
+    vm.submitDisabled = function () {
+        return angular.isUndefined(vm.myFile);
+    };
+    
+    function tagsToList(tags) {
+        var tagList = '';
+        
+        angular.forEach(tags, function(tag) {
+            tagList = tagList + tag.text + ', ';
+        });
+        
+        return tagList;
+    }
+}

@@ -10,15 +10,14 @@ var pathwaySchema = new Schema({
     longDescription: String,
     authorNotes: String,
     materials: String,
-    targetAges: [Number],
-    subjectAreas: [String],
-    environments: [String],
-    standards: [String],
+    targetAges: {},
+    subjectAreas: String,
+    environments: String,
+    standards: [{text: String}],
+    tags: [{text: String}],
     dateCreated: {type: Date, default: Date.now},
     visible: {type: Boolean, default: false},
-    badge: {
-        name: "String"
-    },
+    badge: Number,
     waypoints: [
         {
             text: String,

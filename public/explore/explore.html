@@ -1,4 +1,20 @@
-<div ng-controller="exploreCtrl">
-    {{badges}}
-    {{test}}
+<ng-include src="'../header/header.html'"></ng-include>
+<h2 class="text-center" style="margin-bottom: 15px;">Explore Lesson Pathways</h2>
+<div ng-controller="ExploreController as explore">
+    <div class="container-fluid">
+        <div class="row" ng-repeat="pathway in explore.pathways">
+            <div class="col-lg-6 col-lg-offset-3 well">
+                <img class="pathway-img" ng-src="{{pathway.badgeImg}}"/>
+                <div class="pathway-summary"><strong><a ui-sref="create.detail({ pathway_id: pathway._id})">{{pathway.title}}</a></strong> <br> {{pathway.description}}</div>
+            </div>
+        </div>
+<!--
+        <div class="row">
+            <div class="col-md-4 text-right"><img class="pathway-img" src="images/ags.png"/></div>
+            <div class="col-md-8 text-left">
+                <strong><a href="#">This is a static sample pathway</a></strong> <br> If this is the only pathway displayed, no pathways have been created yet.
+            </div>
+        </div>
+-->
+    </div>
 </div>

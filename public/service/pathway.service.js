@@ -16,7 +16,7 @@ function pathwayService($http) {
     }
     
     function getPathway(pathwayId) {
-        return $http.get('/api/pathways/' + pathwayId);
+        return $http.get('/api/pathway/' + pathwayId);
     }
     
     function makePathway(content) {
@@ -24,6 +24,6 @@ function pathwayService($http) {
     }
     
     function savePathway(pathwayId, content) {
-        return $http.put('/api/pathways/' + pathwayId, content);
+        return $http.put('/api/pathway/' + pathwayId, content);
     }
 }
