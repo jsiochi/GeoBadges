@@ -3,8 +3,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
-var https = require('https');
-var querystring = require('querystring');
 var formidable = require('formidable');
 //need to use request lib, but resolve naming conflict with local function-scope variables first
 var request = require('request');
@@ -13,7 +11,8 @@ var fs = require('fs');
 var db = require('./config/db');
 
 var port = process.env.PORT || 8080;
-var credlyApi = 'https://api.credly.com/v1.1/';
+
+var credlyApi = require('./config/credly').credlyApi;
 
 var credlyToken = '';
 
@@ -34,6 +33,7 @@ var pathway = require('./app/pathway');
 mongoose.connect(db.url);
 
 var badgedb = mongoose.connection;
+
 badgedb.once('open', function (callback) {
   console.log('db connection successful');
 });
@@ -46,21 +46,7 @@ var router = express.Router();
 
 //should use middleware for validation and auth. NEED THIS SOON (ish)
 
-//helper function to generate HTTP request options
-function getOptions(pathUrl, method) {
-    var options = {
-            host: 'api.credly.com',
-            path: pathUrl, //MUST find a better way to do this!!
-            headers: {
-                'X-Api-Key' : process.env.CREDLY_KEY, 
-                'X-Api-Secret' : process.env.CREDLY_SECRET
-            },
-            method: method
-        };
-    
-    return options;
-}
-
+/* METHOD IS DEPRECATED */
 router.get('/api/badges', function(req, res) {
     badge.find(function(err, badges) {
         
@@ -153,29 +139,6 @@ router.put('/api/pathway/:pathway_id', function(req,res) {
     });
 });
 
-router.post('/api/newbadge', function(req, res, body) {
-    
-    getAuthToken(function(token) {
-        
-        
-        /*req.pipe(request({
-            uri: credlyApi + 'badges',
-            qs: {
-                access_token: token
-            },
-            headers: {
-                'X-Api-Key': process.env.CREDLY_KEY,
-                'X-Api-Secret': process.env.CREDLY_SECRET
-            },
-            method: 'POST',
-            body: body
-        });*/
-        
-        //res.send('NICE');
-    });
-});
-
-
 //begin callback hell - also need to re configure dir it's saved in
 router.post('/api/credlybadge', function(req, res) {
     getAuthToken(function(token) {
@@ -186,7 +149,6 @@ router.post('/api/credlybadge', function(req, res) {
                 console.error(err.message);
                 return;
             }
-            
             
             //need something that deletes images after certain period of time?
             var imgPath = '/var/folders/bd/xzbbnfg56gng6hvm6yl19j8c0000gn/T/upload_8c5c2bc9f9619db9422a05797c1ee446';
