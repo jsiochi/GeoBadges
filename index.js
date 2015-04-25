@@ -10,11 +10,13 @@ var fs = require('fs');
 
 var db = require('./config/db');
 
+var credlyRoutes = require('./routes/credly');
+
 var port = process.env.PORT || 8080;
 
-var credlyApi = require('./config/credly').credlyApi;
+//var credlyApi = require('./config/credly').credlyApi;
 
-var credlyToken = '';
+//var credlyToken = '';
 
 //need to add app.use for other dependencies
 
@@ -46,18 +48,6 @@ var router = express.Router();
 
 //should use middleware for validation and auth. NEED THIS SOON (ish)
 
-/* METHOD IS DEPRECATED */
-router.get('/api/badges', function(req, res) {
-    badge.find(function(err, badges) {
-        
-        if(err) {
-            res.send(err);
-        }
-        
-        res.json(badges);
-    });
-});
-
 router.get('/api/pathways', function(req,res) {
     pathway.find(function(err, pathways) {
         
@@ -65,7 +55,7 @@ router.get('/api/pathways', function(req,res) {
             res.send(err);
         }
         
-        console.log(pathways);
+        //console.log(pathways);
         
         res.json(pathways);
     });
@@ -139,172 +129,10 @@ router.put('/api/pathway/:pathway_id', function(req,res) {
     });
 });
 
-//begin callback hell - also need to re configure dir it's saved in
-router.post('/api/credlybadge', function(req, res) {
-    getAuthToken(function(token) {
-        var form = new formidable.IncomingForm();
-        
-        form.parse(req, function(err, field, file) {
-            if(err) {
-                console.error(err.message);
-                return;
-            }
-            
-            //need something that deletes images after certain period of time?
-            var imgPath = '/var/folders/bd/xzbbnfg56gng6hvm6yl19j8c0000gn/T/upload_8c5c2bc9f9619db9422a05797c1ee446';
-            
-            //var formData = {title: 'A Cool New Badge', attachment: [fs.createReadStream(imgPath)]};
-            
-            //OH no, need to check if file.path is null!!
-            
-            fs.readFile(file.file.path, 'base64', function(err, imgData) {
-                if (err) {
-                    return console.log(err);
-                }
-                
-                console.log('read the file');
-                
-                request({
-                    uri: credlyApi + 'badges',
-                    qs: {
-                        access_token: token
-                    },
-                    headers: {
-                        'X-Api-Key' : process.env.CREDLY_KEY, 
-                        'X-Api-Secret' : process.env.CREDLY_SECRET
-                    },
-                    form: {
-                        title: field.title,
-                        attachment: imgData,
-                        short_description: field.short_description,
-                        description: field.description,
-                        categories: field.tags,
-                        expires_in: 10000000 //NEED TO FIGURE OUT A MAX NUMBER
-                    },
-                    method: 'POST'
-                }, function(error, response, body) {
-                    console.log(body);
-                    res.json(body);
-                });
-            }); 
-        });
-    });
-});
 
-//update a badge with new image. should refactor this - too much code duplication!!
-router.put('/api/credlybadge/:badge_id', function(req, res) {
-    getAuthToken(function(token) {
-        var form = new formidable.IncomingForm();
-        
-        form.parse(req, function(err, field, file) {
-            if(err) {
-                console.error(err.message);
-                return;
-            }
-            
-            //OH no, need to check if file.path is null!!
-            
-            fs.readFile(file.file.path, 'base64', function(err, imgData) {
-                if (err) {
-                    return console.log(err);
-                }
-                
-                console.log('read the file');
-                
-                request({
-                    uri: credlyApi + 'badges/' + req.params.badge_id,
-                    qs: {
-                        access_token: token
-                    },
-                    headers: {
-                        'X-Api-Key' : process.env.CREDLY_KEY, 
-                        'X-Api-Secret' : process.env.CREDLY_SECRET
-                    },
-                    form: {
-                        title: field.title,
-                        attachment: imgData,
-                        short_description: field.short_description,
-                        description: field.description,
-                        categories: field.tags,
-                        expires_in: 10000000 //NEED TO FIGURE OUT A MAX NUMBER
-                    },
-                    method: 'POST'
-                }, function(error, response, body) {
-                    console.log(body);
-                    res.json(body);
-                });
-            }); 
-        });
-    });
-});
-
-//test API route for credly auth stuff
-router.get('/api/credlyuser', function(req,res) {
-    
-    getAuthToken(function(token) {
-        request({
-            uri: credlyApi + 'me',
-            qs: {
-                access_token: token
-            },
-            headers: {
-            'X-Api-Key' : process.env.CREDLY_KEY, 
-            'X-Api-Secret' : process.env.CREDLY_SECRET
-            },
-            method: 'GET',
-            json: true
-        }, function(error, response, body) {
-            console.log(body);
-            res.json(body);
-        });
-    });
-    
-});
-
-//get badge information by id - should this information be saved in the DB as well? what about updating it / consistency?
-router.get('/api/credlybadge/:badge_id', function(req, res) {
-    request({
-        uri: credlyApi + 'badges/' + req.params.badge_id,
-        method: 'GET',
-        headers: {
-            'X-Api-Key' : process.env.CREDLY_KEY, 
-            'X-Api-Secret' : process.env.CREDLY_SECRET
-        },
-        json: true
-    }, function(error, response, body) {
-        console.log(response);
-        console.log(body);
-        res.json(body);
-    });
-});
-
-function getAuthToken(callback) {
-    if(credlyToken !== '') {
-        console.log('token already set: ' + credlyToken);
-        callback(credlyToken);
-        return;
-    }
-    
-    request({
-        uri: credlyApi + 'authenticate',
-        method: 'POST',
-        headers: {
-            'X-Api-Key' : process.env.CREDLY_KEY, 
-            'X-Api-Secret' : process.env.CREDLY_SECRET
-        },
-        auth: {
-            user : process.env.CREDLY_USER,
-            pass : process.env.CREDLY_PASSWORD
-        },
-        json: true
-    }, function(error, response, body) {
-        console.log(body);
-        credlyToken = body.data.token;
-        console.log('obtained new token: ' + credlyToken);
-        callback(credlyToken);
-    });
-};
-    
+router.post('/api/credlybadge', credlyRoutes.createBadge);
+router.put('/api/credlybadge/:badge_id', credlyRoutes.updateBadge);
+router.get('/api/credlybadge/:badge_id', credlyRoutes.getBadge);
 
 app.use('/', router);
 

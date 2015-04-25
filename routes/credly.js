@@ -1,4 +1,4 @@
-/* Credly controller - the purpose of this controller is to modularize all of the functionality relating to badges and Credly users */
+/* Credly routes - the purpose of this module is to modularize all of the functionality relating to badges and Credly users */
 
 var formidable = require('formidable');
 var request = require('request');
@@ -6,8 +6,8 @@ var fs = require('fs');
 
 var credlyApi = require('../config/credly').credlyApi;
 
-var updateUri = credlyApi + 'badges';
-var createUri = credlyApi + 'badges/';
+var createUri = credlyApi + 'badges';
+var updateUri = credlyApi + 'badges/';
 
 var credlyToken = '';
 
@@ -27,6 +27,7 @@ function updateBadge(req, res) {
     badgeRequest(updateUri + req.params.badge_id, 'POST', req, res);
 }
 
+//get badge information by id - should this information be saved in the DB as well? what about updating it / consistency?
 function getBadge(req, res) {
     request({
         uri: credlyApi + 'badges/' + req.params.badge_id,
@@ -44,6 +45,8 @@ function getBadge(req, res) {
 }
 
 /* Functions not exposed */
+
+//Possibly need to reconfigure saving directory
 function badgeRequest(uri, method, req, res) {
     getAuthToken(function(token) {
         var form = new formidable.IncomingForm();
@@ -116,3 +119,26 @@ function getAuthToken(callback) {
         callback(credlyToken);
     });
 }
+
+//test API route for credly auth stuff - is this still needed?
+/*router.get('/api/credlyuser', function(req,res) {
+    
+    getAuthToken(function(token) {
+        request({
+            uri: credlyApi + 'me',
+            qs: {
+                access_token: token
+            },
+            headers: {
+            'X-Api-Key' : process.env.CREDLY_KEY, 
+            'X-Api-Secret' : process.env.CREDLY_SECRET
+            },
+            method: 'GET',
+            json: true
+        }, function(error, response, body) {
+            console.log(body);
+            res.json(body);
+        });
+    });
+    
+});*/
