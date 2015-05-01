@@ -1,26 +1,17 @@
 <ng-include src="'../header/header.html'"></ng-include>
-<div class="container-fluid text-center" style="height: 800px;" ng-controller="CreateController as creator">
+<div class="container-fluid text-center" style="height: 800px; position: relative;" ng-controller="CreateController as creator">
+<!--
     <div class="row create-header">
         <div class="col-sm-2 text-left">
             <a ui-sref="explore"><span class="glyphicon glyphicon-arrow-left"></span> Back to Explore</a>
         </div>
     </div>
-    <div class="row" id="waypoint-nav">
-        <!-- Should the current waypoint be refactored into the route? e.g. /create/:pathwayId/:waypoint, then view switching based on the route stateParams is natural -->
-        <div class="col-lg-11">
-            <div ng-click="creator.onMetadata = 1" class="waypoint" ng-class="{'waypoint-active': creator.onMetadata}">Overview</div>
-            <div ng-click="creator.currentWaypoint = waypoint.index; creator.onMetadata = 0" ng-repeat="waypoint in creator.waypoints" ng-class="{'waypoint-active': creator.currentWaypoint === waypoint.index && !creator.onMetadata}" class="waypoint">
-                {{waypoint.text}}
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <div ng-click="creator.addWaypoint()" class="pathway-action"><span class="glyphicon glyphicon-plus"></span></div>
-            <div ng-click="creator.savePathway()" class="pathway-action"><span class="glyphicon glyphicon-floppy-disk"></span></div>
-        </div>
-    </div>
-    <div class="row pathway-container">
-        <div ng-if="creator.onMetadata" class="form-horizontal" >
-            <h2>Overview</h2>
+-->
+    <div class="pathway-container define-pathway" ng-class="creator.step === 0 ? 'pathway-active' : 'pathway-inactive'">
+        <div class="form-horizontal">
+            <h2>Step 1 - Define Lesson</h2>
+            <h4>Tell us about your pathway - description, who it is meant for</h4>
+            
             <div class="form-group">
                 <label for="pahtway-title" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
@@ -61,29 +52,35 @@
             <select ng-model="creator.pathway.environments" ng-options="env for env in creator.learningEnvList">
                 <option value="">Learning Evironment</option>
             </select>
-            <tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="Standards"></tags-input>
-            <tags-input class="bootstrap" ng-model="creator.pathway.tags" type="text" replace-spaces-with-dashes="false" placeholder="Tags"></tags-input>
-        </div>
-        <!-- This is pretty bad, man. I should probably fix the scoping -->
-        <div ng-if="!creator.onMetadata">
-            <div class="col-md-4 col-md-offset-4" style="margin-bottom: 10px;"><input type="text" class="form-control text-center" ng-model="creator.waypoints[creator.currentWaypoint].text" placeholder="Waypoint Title"/></div>
-            <div class="rm-waypoint text-right" ng-click="creator.deleteWaypoint(creator.currentWaypoint)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Delete Waypoint</div>
-            <textarea ng-model="creator.waypoints[creator.currentWaypoint].content" class="form-control" rows="10" placeholder="Waypoint Content">
-            </textarea>
+            <tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Standard"></tags-input>
+            <tags-input class="bootstrap" ng-model="creator.pathway.tags" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Tag"></tags-input>
+            
+            <div class="navstep text-right"><span>I'm done and ready to build my pathway</span> <button type="button" class="btn btn-default btn-continue" ng-click="creator.moveStep(1)"><span class="glyphicon glyphicon-arrow-right"></span></button></div>
+            
         </div>
     </div>
-    <div class="row badge-container">
-        <h2>Badge</h2>
-        <div class="col-lg-6">
-            <img class="pathway-img-lg" ng-src="{{creator.badgeImage}}" alt="Create a badge by uploading an image"/>
+    <div class="pathway-container" ng-class="creator.step === 1 ? 'pathway-active' : 'pathway-inactive'">
+        <h2>Step 2 - Build Lesson</h2>
+        <h4>Build the content and flow of you lesson pathway</h4>
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 text-center">Start building your lesson by adding a lesson waypoint</div>
         </div>
-        <div class="col-lg-6">
-            <h3>Upload Image</h3>
-            <form class="badge-form" ng-submit="creator.createBadge()">
-                <input class="badge-file" type="file" file-model="creator.myFile" name="file"><br /><br />
-                <input type="submit" id="submit" value="{{creator.badgeButtonText()}}" ng-disabled="creator.submitDisabled()">
-            </form>
+        
+        <div class="row text-center vertical-spaced" ng-if="creator.waypoints.length === 0">
+            <button type="button" class="btn btn-default">Create first waypoint</button>
         </div>
+        
+        <accordion close-others="true">
+            <accordion-group ng-repeat="waypoint in creator.waypoints" heading="{{waypoint.text}}">
+                {{waypoint.content}}
+            </accordion-group>
+        </accordion>
+        
+        <div class="row text-center vertical-spaced">
+            <button type="button" class="btn btn-default">See finished example</button>
+        </div>
+        
+        <div class="navstep col-md-6 text-left"><button type="button" class="btn btn-default btn-continue" ng-click="creator.moveStep(-1)"><span class="glyphicon glyphicon-arrow-left"></span></button></div>
+        <div class="navstep col-md-6 text-right"><span>Ready to Publish? Continue to review</span> <button type="button" class="btn btn-default btn-continue" ng-click="creator.moveStep(1)"><span class="glyphicon glyphicon-arrow-right"></span></button></div>
     </div>
-    
 </div>

@@ -7,6 +7,7 @@ angular.module('app', [
     'app.explore',
     'app.create',
     'ui.router',
+    'ui.bootstrap',
     'ngTagsInput'
 ])
 .config(function($stateProvider, $urlRouterProvider) {

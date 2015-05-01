@@ -14,6 +14,15 @@ function CreateController(pathwayService, badgeService, $stateParams, $state) {
     
     vm.tmpImage = undefined;
     
+    //test - ok
+    vm.step = 0;
+    var maxStep = 2;
+    vm.moveStep = function(dir) {
+        if((vm.step + dir) >= 0 && (vm.step + dir) <= maxStep) {
+            vm.step = vm.step + dir;
+        }
+    };
+    
     function indexWaypoints(points) {
         var j = 0;
         for(j = 0; j < points.length; j++) {

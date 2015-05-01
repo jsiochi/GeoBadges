@@ -19,8 +19,35 @@
 }
 
 .pathway-container {
+    position: absolute;
     width: 90%;
-    display: inline-block;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: opacity 2s;
+    transition: opacity 2s;
+}
+
+.pathway-active {
+    opacity: 1;   
+}
+
+.pathway-container input[type="text"], .pathway-container textarea {
+    background-color: #cccccc;
+    color: black;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.pathway-container ::-webkit-input-placeholder {
+    color: #656565;
+}
+
+.bootstrap .tags .tag-item {
+    background-color: #ccc;
+    color: black;
+    border: none;
 }
 
 .pathway-img {
@@ -29,9 +56,38 @@
     display: inline-block;
 }
 
+.pathway-invisible {
+    /*left: -3000px;*/
+    opacity: 0;
+}
+
 .pathway-img-lg {
     width: 200px;
     margin: 20px 0px;
+}
+
+.navstep {
+    margin-top: 20px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navstep > span {
+    margin-right: 15px;
+}
+
+.navstep .glyphicon {
+    color: white;
+}
+
+.navstep button {
+    background-color: #449d44;
+    border: none;
+}
+
+.navstep button:hover {
+    background-color: #00d000;
+    border: none;
 }
 
 #waypoint-nav {
@@ -77,8 +133,19 @@
     margin: 10px 5px;
     cursor: pointer;
 }
+
 .pathway-summary {
     display: inline-block;
     vertical-align: top;
     margin-left: 20px;
+}
+
+.build-pathway {
+    position: absolute;
+    /*left: 4000px;*/
+    opacity: 0;
+}
+
+.vertical-spaced {
+    margin: 30px 0;
 }
