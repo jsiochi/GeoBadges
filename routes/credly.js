@@ -5,6 +5,7 @@ var request = require('request');
 var fs = require('fs');
 
 var credlyApi = require('../config/credly').credlyApi;
+var badgeBuilderUri = require('../config/credly').badgeBuilder;
 
 var createUri = credlyApi + 'badges';
 var updateUri = credlyApi + 'badges/';
@@ -14,7 +15,8 @@ var credlyToken = '';
 module.exports = {
     createBadge: createBadge,
     updateBadge: updateBadge,
-    getBadge: getBadge
+    getBadge: getBadge,
+    getBadgeBuilderURL: getBadgeBuilderURL
 };
 
 /* External API Calls to Credly system */
@@ -41,6 +43,27 @@ function getBadge(req, res) {
         console.log(response);
         console.log(body);
         res.json(body);
+    });
+}
+
+function getBadgeBuilderURL(req, res) {
+    getAuthToken(function(token) {
+        request({
+            uri: badgeBuilderUri,
+            method: 'POST',
+            form: {
+                access_token: token
+            },
+            headers: {
+                'X-Api-Key' : process.env.CREDLY_KEY, 
+                'X-Api-Secret' : process.env.CREDLY_SECRET
+            },
+            json: true
+        }, function(error, response, body) {
+            console.log(response);
+            console.log(body);
+            res.json({badgeBuilderRef: 'https://credly.com/badge-builder/embed/' + body.temp_token});
+        });
     });
 }
 

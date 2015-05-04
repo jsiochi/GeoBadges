@@ -1,18 +1,14 @@
 angular.module('app.create')
     .controller('CreateController', CreateController);
 
-CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state'];
+CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal'];
 
-function CreateController(pathwayService, badgeService, $stateParams, $state) {
+function CreateController(pathwayService, badgeService, $stateParams, $state, $modal) {
     var vm = this;
     
     console.log($stateParams);
     
     vm.pathway = {};
-    
-    vm.onMetadata = 1;
-    
-    vm.tmpImage = undefined;
     
     //test - ok
     vm.step = 0;
@@ -52,9 +48,8 @@ function CreateController(pathwayService, badgeService, $stateParams, $state) {
     vm.addWaypoint = function () {
         var number = vm.waypoints.length;
         console.log(number);
-        vm.waypoints.push({text: 'Waypoint ' + (number + 1), content: '', index: number});
+        vm.waypoints.push({text: 'New Waypoint', content: '', index: number});
         vm.currentWaypoint = number;
-        vm.onMetadata = false;
         vm.savePathway();
     };
     
@@ -146,10 +141,6 @@ function CreateController(pathwayService, badgeService, $stateParams, $state) {
         }
     };
     
-    vm.submitDisabled = function () {
-        return angular.isUndefined(vm.myFile);
-    };
-    
     function tagsToList(tags) {
         var tagList = '';
         
@@ -158,5 +149,25 @@ function CreateController(pathwayService, badgeService, $stateParams, $state) {
         });
         
         return tagList;
+    }
+    
+    vm.editBadge = function () {
+        var badgeModal = $modal.open({
+            animation: true,
+            templateUrl: '../badge/badge.html',
+            controller: 'BadgeController',
+            size: 'lg',
+            resolve: {
+                badgeData: function () {
+                    return vm.pathway;
+                }
+            }
+        });
+        
+        badgeModal.result.then(function (badgeUpdate) {
+            console.log(badgeUpdate);
+        }, function () {
+            console.log('Modal dismissed');
+        });
     }
 }

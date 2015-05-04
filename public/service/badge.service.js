@@ -8,7 +8,8 @@ function badgeService($http) {
         createBadge: createBadge,
         getBadge: getBadge,
         getAllBadges: getAllBadges,
-        updateBadge: updateBadge
+        updateBadge: updateBadge,
+        getBadgeBuilder: getBadgeBuilder
     }
     
     function createBadge(content) {
@@ -32,6 +33,10 @@ function badgeService($http) {
                 'Content-Type': undefined
             }            
         });
+    }
+    
+    function getBadgeBuilder() {
+        return $http.get('/api/credlybadgebuilder');
     }
     
     function getAllBadges() {
