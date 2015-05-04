@@ -16,7 +16,9 @@ Badgathon testing, first week of June
 -build tests and documentation
 
 Session - OSM, June 6-7
+
 Summer - build, grow, test, improve
+
 K-12 Rollout: NCGE, August 2015
 
 
