@@ -1,0 +1,55 @@
+<ng-include src="'../header/header.html'"></ng-include>
+<div class="container-fluid" ng-controller="CreateController as creator">
+    <div class="col-lg-2">
+        <div class="pathway-guide">
+            <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'define'}" ng-click="creator.changePart('define', 0)"><span class="waypoint-text">Overview</span></div>
+            <div ng-repeat="waypoint in creator.waypoints" class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'waypoint' && creator.currentWaypoint === waypoint.index}" ng-click="creator.changePart('waypoint', waypoint.index)"><span class="waypoint-text">{{waypoint.text}}</span></div>
+        </div>
+    </div>
+    <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'define'">
+        <div class="row">
+            <div class="col-md-8"><h1>{{creator.pathway.title}}</h1><h3>{{creator.pathway.description}}</h3></div>
+            <div class="col-md-4">Grade Level: {{creator.pathway.targetAges}} <br/> Subject: {{creator.pathway.subjectAreas}} <br/> Environment: {{creator.pathway.environments}}</div>
+        </div>
+        <div class="row">
+            {{creator.pathway.longDescription}}
+        </div>
+<!--
+        <div class="row">
+            
+            
+            <div class="col-md-8">
+                <tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="No standards to show" readonly></tags-input>
+                <tags-input class="bootstrap" ng-model="creator.pathway.tags" type="text" replace-spaces-with-dashes="false" placeholder="No tags to show" readonly></tags-input>
+            </div>
+                
+        </div>
+-->
+    </div>
+    <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'badge'">
+        <h2>Badge</h2>
+        <div class="col-lg-3">
+            <img class="pathway-img-lg" ng-src="{{creator.badgeImage}}" alt="Create a badge by uploading an image"/>
+        </div>
+        <div class="col-lg-9">
+            <h3>Upload Image</h3>
+            <form class="badge-form">
+                <button type="button" class="btn btn-default">
+                    <label class="badge-label">Choose File
+                        <input class="badge-file" type="file" file-model="creator.myFile" name="file"><br /><br />
+                    </label>
+                </button>
+                <button type="button" class="btn btn-default" ng-disabled="creator.submitDisabled()" ng-click="creator.createBadge()">
+                    {{creator.badgeButtonText()}}
+                </button>
+                <span>Chosen file: {{creator.myFile.name || 'None Selected'}}</span>
+<!--                <input type="submit" id="submit" value="{{creator.badgeButtonText()}}" ng-disabled="creator.submitDisabled()">-->
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'waypoint'">
+        <div class="col-md-4 col-md-offset-4" style="margin-bottom: 10px;"><input type="text" class="form-control text-center" ng-model="creator.waypoints[creator.currentWaypoint].text" placeholder="Waypoint Title" readonly/></div>
+        <textarea ng-model="creator.waypoints[creator.currentWaypoint].content" class="form-control" rows="10" placeholder="Type Content Here" readonly>
+        </textarea>
+    </div>
+</div>

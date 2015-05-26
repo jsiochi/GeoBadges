@@ -28,5 +28,9 @@ angular.module('app', [
     .state('explore', {
         url: '/explore',
         templateUrl: 'explore/explore.html'
+    })
+    .state('pathway', {
+        url: '/pathway/:pathway_id',
+        templateUrl: 'pathway/pathway.html'
     });
 });

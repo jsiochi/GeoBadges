@@ -5,7 +5,8 @@ module.exports = {
     getPathways: getPathways,
     getPathwayById: getPathwayById,
     createPathway: createPathway,
-    updatePathway: updatePathway
+    updatePathway: updatePathway,
+    queryPathways: queryPathways
 };
 
 function getPathways(req, res) {
@@ -45,7 +46,8 @@ function createPathway(req, res) {
         environments: req.body.environments,
         standards: req.body.standards,
         tags: req.body.tags,
-        badge: req.body.badge
+        badge: req.body.badge,
+        badgeImg: req.body.badgeImg
     });
     
     path.save(function (err) {
@@ -77,6 +79,7 @@ function updatePathway(req, res) {
         path.standards = req.body.standards;
         path.tags = req.body.tags;
         path.badge = req.body.badge;
+        path.badgeImg = req.body.badgeImg;
         
         
         path.save(function(err) {
@@ -86,5 +89,15 @@ function updatePathway(req, res) {
             
             res.json({message: 'waypoints updated'});
         });
+    });
+}
+
+function queryPathways(req, res) {
+    pathway.find(req.body, function(err, docs) {
+        if(err) {
+            console.log(err);
+        }
+        
+        res.json(docs);
     });
 }

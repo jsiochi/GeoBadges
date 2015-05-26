@@ -8,7 +8,8 @@ function pathwayService($http) {
         getAllPathways: getAllPathways,
         getPathway: getPathway,
         makePathway: makePathway,
-        savePathway: savePathway
+        savePathway: savePathway,
+        queryPathways: queryPathways
     }
     
     function getAllPathways() {
@@ -25,5 +26,9 @@ function pathwayService($http) {
     
     function savePathway(pathwayId, content) {
         return $http.put('/api/pathway/' + pathwayId, content);
+    }
+    
+    function queryPathways(query) {
+        return $http.post('/api/pathways/find', query);
     }
 }
