@@ -16,7 +16,8 @@ module.exports = {
     createBadge: createBadge,
     updateBadge: updateBadge,
     getBadge: getBadge,
-    getBadgeBuilderURL: getBadgeBuilderURL
+    getBadgeBuilderURL: getBadgeBuilderURL,
+    claimBadge: claimBadge
 };
 
 /* External API Calls to Credly system */
@@ -65,6 +66,62 @@ function getBadgeBuilderURL(req, res) {
             res.json({badgeBuilderRef: 'https://credly.com/badge-builder/embed/' + body.temp_token});
         });
     });
+}
+
+function claimBadge(req, res) {
+    getAuthToken(function(token) {
+        request({
+            uri: credlyApi + 'me/claimable_badges/create',
+            method: 'POST',
+            qs: {
+                access_token: token
+            },
+            form: {
+                badge_id: req.body.badge_id,
+                evidence_type: 'link',
+                evidence_link: req.body.evidence
+            },
+            headers: {
+                'X-Api-Key' : process.env.CREDLY_KEY, 
+                'X-Api-Secret' : process.env.CREDLY_SECRET
+            },
+            json: true
+        }, function(error, response, body) {
+            console.log(response);
+            console.log(body);
+            
+            completeClaim(body.data.id, body.data.badge_id, body.data.code, req.body.username, req.body.password, function(result) {
+                res.json(result);
+            });
+        });
+    });
+}
+
+/* Helper function for credit claiming */
+function completeClaim(id, badgeId, code, user, pass, callback) {
+    var onAuth = function(token) {
+        request({
+            uri: credlyApi + 'me/claimable_badges/claim/' + badgeId,
+            method: 'POST',
+            qs: {
+                access_token: token
+            },
+            form: {
+                id: id,
+                code: code
+            },
+            headers: {
+                'X-Api-Key' : process.env.CREDLY_KEY, 
+                'X-Api-Secret' : process.env.CREDLY_SECRET
+            },
+            json: true
+        }, function(error, response, body) {
+            console.log(body);
+            callback(body);
+        });
+    };
+    
+    getAuthToken(onAuth, user, pass);
 }
 
 /* Functions not exposed */
@@ -116,11 +173,19 @@ function badgeRequest(uri, method, req, res) {
     });
 }
 
-function getAuthToken(callback) {
-    if(credlyToken !== '') {
+function getAuthToken(callback, username, password) {
+    var user = process.env.CREDLY_USER;
+    var pass = process.env.CREDLY_PASSWORD;
+    var learner = false;
+    
+    if(credlyToken !== '' && username === undefined && password === undefined) {
         console.log('token already set: ' + credlyToken);
         callback(credlyToken);
         return;
+    } else if(username !== undefined && password !== undefined) {
+        user = username;
+        pass = password;
+        learner = true;
     }
     
     request({
@@ -131,15 +196,17 @@ function getAuthToken(callback) {
             'X-Api-Secret' : process.env.CREDLY_SECRET
         },
         auth: {
-            user : process.env.CREDLY_USER,
-            pass : process.env.CREDLY_PASSWORD
+            user : user,
+            pass : pass
         },
         json: true
     }, function(error, response, body) {
         console.log(body);
-        credlyToken = body.data.token;
-        console.log('obtained new token: ' + credlyToken);
-        callback(credlyToken);
+        if(!learner) {
+            credlyToken = body.data.token;
+            console.log('obtained new token: ' + credlyToken);
+        }
+        callback(body.data.token);
     });
 }
 
@@ -165,3 +232,5 @@ function getAuthToken(callback) {
     });
     
 });*/
+
+/*Object {meta: Object, data: Object}data: Objectbadge_id: 42871claimed: 0code: "8BF-34C6-B77"evidence: Array[1]expires_at: ""id: 5235is_deleted: falseissuer_id: 2047060limit: nulltestimonial: Array[0]__proto__: Objectmeta: Objectmessage: ""more_info: nullstatus: "OK"status_code: 200token_owner: 2047060__proto__: Object__proto__: Object*/

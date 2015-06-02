@@ -2,54 +2,70 @@
 <div class="container-fluid" ng-controller="CreateController as creator">
     <div class="col-lg-2">
         <div class="pathway-guide">
-            <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'define'}" ng-click="creator.changePart('define', 0)"><span class="waypoint-text">Overview</span></div>
+            <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'define'}" ng-click="creator.changePart('define', 0)"><span class="waypoint-text"><b>{{creator.pathway.title}}</b></span></div>
             <div ng-repeat="waypoint in creator.waypoints" class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'waypoint' && creator.currentWaypoint === waypoint.index}" ng-click="creator.changePart('waypoint', waypoint.index)"><span class="waypoint-text">{{waypoint.text}}</span></div>
+            <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'badge'}" ng-click="creator.changePart('badge', 0)"><span class="waypoint-text">Earn Badge!</span></div>
         </div>
     </div>
-    <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'define'">
+    <div id="learner-overview" class="col-lg-10 section-container" ng-if="creator.guidePart === 'define'">
         <div class="row">
-            <div class="col-md-8"><h1>{{creator.pathway.title}}</h1><h3>{{creator.pathway.description}}</h3></div>
-            <div class="col-md-4">Grade Level: {{creator.pathway.targetAges}} <br/> Subject: {{creator.pathway.subjectAreas}} <br/> Environment: {{creator.pathway.environments}}</div>
+            <div class="col-md-8"><h1>{{creator.pathway.title}}</h1><h4><em>{{creator.pathway.description}}</em></h4></div>
+            <div class="col-md-2"><img class="pathway-img-lg" ng-src="{{creator.badgeImage}}" alt="Sorry, no badge exists for this pathway"/></div>
         </div>
         <div class="row">
-            {{creator.pathway.longDescription}}
-        </div>
-<!--
-        <div class="row">
-            
-            
-            <div class="col-md-8">
-                <tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="No standards to show" readonly></tags-input>
-                <tags-input class="bootstrap" ng-model="creator.pathway.tags" type="text" replace-spaces-with-dashes="false" placeholder="No tags to show" readonly></tags-input>
+            <div class="col-md-12">
+                <h3><span class="glyphicon glyphicon-triangle-right"></span>Description</h3>
+                {{creator.pathway.longDescription}}
             </div>
-                
         </div>
--->
-    </div>
-    <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'badge'">
-        <h2>Badge</h2>
-        <div class="col-lg-3">
-            <img class="pathway-img-lg" ng-src="{{creator.badgeImage}}" alt="Create a badge by uploading an image"/>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Materials</h3>
+                {{creator.pathway.materials}}
+            </div>
         </div>
-        <div class="col-lg-9">
-            <h3>Upload Image</h3>
-            <form class="badge-form">
-                <button type="button" class="btn btn-default">
-                    <label class="badge-label">Choose File
-                        <input class="badge-file" type="file" file-model="creator.myFile" name="file"><br /><br />
-                    </label>
-                </button>
-                <button type="button" class="btn btn-default" ng-disabled="creator.submitDisabled()" ng-click="creator.createBadge()">
-                    {{creator.badgeButtonText()}}
-                </button>
-                <span>Chosen file: {{creator.myFile.name || 'None Selected'}}</span>
-<!--                <input type="submit" id="submit" value="{{creator.badgeButtonText()}}" ng-disabled="creator.submitDisabled()">-->
-            </form>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Other Information</h3>
+                Grade Level: {{creator.pathway.targetAges}} <br/> 
+                Subject: {{creator.pathway.subjectAreas}} <br/> 
+                Environment: {{creator.pathway.environments}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Tags</h3>
+                <tags-input class="bootstrap" ng-model="creator.pathway.tags" type="text" replace-spaces-with-dashes="false" placeholder=""></tags-input>
+            </div>
         </div>
     </div>
     <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'waypoint'">
-        <div class="col-md-4 col-md-offset-4" style="margin-bottom: 10px;"><input type="text" class="form-control text-center" ng-model="creator.waypoints[creator.currentWaypoint].text" placeholder="Waypoint Title" readonly/></div>
-        <textarea ng-model="creator.waypoints[creator.currentWaypoint].content" class="form-control" rows="10" placeholder="Type Content Here" readonly>
-        </textarea>
+        <h2>{{creator.waypoints[creator.currentWaypoint].text}}</h2>
+        <p class="waypoint-content" ng-bind-html="creator.waypoints[creator.currentWaypoint].content"></p>
+    </div>
+    <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'badge'">
+        <h2>Earn Badge</h2>
+        <div class="col-lg-3">
+            <img class="pathway-img-lg" ng-src="{{creator.badgeImage}}" alt="Sorry, no badge exists for this pathway"/>
+        </div>
+        <div class="col-lg-9">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="pahtway-title" class="col-sm-4 control-label">Credly Username</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="creator.user" id="pathway-title" placeholder="Username"/> 
+                    </div>
+                    <label for="pahtway-title" class="col-sm-4 control-label">Credly Password</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" ng-model="creator.pass" id="pathway-title" placeholder="Password"/>
+                    </div>
+                    <label for="pahtway-title" class="col-sm-4 control-label">Evidence URL</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="creator.evidence" id="pathway-title" placeholder="Evidence URL"/>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-default" ng-click="creator.claim()">Claim This Badge</button>
+        </div>
     </div>
 </div>

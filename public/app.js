@@ -8,7 +8,8 @@ angular.module('app', [
     'app.create',
     'ui.router',
     'ui.bootstrap',
-    'ngTagsInput'
+    'ngTagsInput',
+    'ngSanitize'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 //    $urlRouterProvider.otherwise('');

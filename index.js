@@ -48,6 +48,7 @@ router.post('/api/credlybadge', credlyRoutes.createBadge);
 router.put('/api/credlybadge/:badge_id', credlyRoutes.updateBadge);
 router.get('/api/credlybadge/:badge_id', credlyRoutes.getBadge);
 router.get('/api/credlybadgebuilder', credlyRoutes.getBadgeBuilderURL);
+router.post('/api/credlybadge/claim', credlyRoutes.claimBadge);
 
 app.use('/', router);
 

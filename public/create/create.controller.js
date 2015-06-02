@@ -169,6 +169,14 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         }
     };
     
+    vm.claim = function() {
+        var myForm = {badge_id: vm.pathway.badge, evidence: vm.evidence, username: vm.user, password: vm.pass};
+        
+        badgeService.claimBadge(myForm).success(function(response) {
+            console.log(response);
+        });
+    }
+    
     function tagsToList(tags) {
         var tagList = '';
         

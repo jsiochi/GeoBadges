@@ -1,8 +1,7 @@
-/*
-.waypoint-content {
-    width: 90%;
-    height: 200px;
-}*/
+.waypoint-content img {
+    display: block;
+    margin: 40px auto;
+}
 
 .waypoint {
     /*display: inline-block;
@@ -276,4 +275,19 @@ button .glyphicon {
 
 .badge-form > .btn {
     height: 35px;
+}
+
+#learner-overview .tags {
+    cursor: default;
+    border: none;
+    box-shadow: none;
+}
+
+#learner-overview .tags .input[type="text"] {
+    display: none;
+}
+
+
+#learner-overview .remove-button {
+    display: none;
 }
