@@ -1062,8 +1062,13 @@ a:focus {
   color: #757575;
 }
 
+#home #gb-points .gb-point .image  {
+    top: 35px;
+    float: right;
+}
+
 #home #gb-points #explore-point .image {
-    top: 40px;
+    top: 0px;
 }
 
 #home #gb-points .gb-point .image img {
@@ -1085,6 +1090,7 @@ a:focus {
   }
 
   #home #gb-points .gb-point.backwards .image {
+    top: 35px;
     float: left;
   }
 }
