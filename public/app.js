@@ -33,5 +33,13 @@ angular.module('app', [
     .state('pathway', {
         url: '/pathway/:pathway_id',
         templateUrl: 'pathway/pathway.html'
+    })
+    .state('about', {
+        url: '/about',
+        templateUrl: 'about/about.html'
+    })
+    .state('contribute', {
+        url: '/contribute',
+        templateUrl: 'contribute/contribute.html'
     });
 });
