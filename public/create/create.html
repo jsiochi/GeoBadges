@@ -5,7 +5,8 @@
             <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'define'}" ng-click="creator.changePart('define', 0)"><span class="waypoint-text">Define Lesson</span></div>
             <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'badge'}" ng-click="creator.changePart('badge', 0)"><span class="waypoint-text">Badge</span></div>
             <div ng-repeat="waypoint in creator.waypoints" class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'waypoint' && creator.currentWaypoint === waypoint.index}" ng-click="creator.changePart('waypoint', waypoint.index)"><span class="waypoint-text">{{waypoint.text}}</span><span class="glyphicon glyphicon-remove rm-waypoint" ng-click="creator.deleteWaypoint(waypoint.index, $event)"></span></div>
-            <div class="waypoint" ng-click="creator.addWaypoint()"><span class="waypoint-text glyphicon glyphicon-plus"></span></div>
+            <div class="waypoint" ng-click="creator.addWaypoint()"><span class="waypoint-text glyphicon glyphicon-plus"></span><span class="waypoint-text">Add New Waypoint</span></div>
+            <button type="button" class="btn btn-default" ng-click=creator.savePathway()>Save Pathway</button>
         </div>
     </div>
     <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'define'">
