@@ -19,6 +19,7 @@ var pathwaySchema = new Schema({
     visible: {type: Boolean, default: false},
     badge: Number,
     badgeImg: {type: String, default: ''},
+    evidenceDescription: String,
     waypoints: [
         {
             text: String,

@@ -1,4 +1,4 @@
-.waypoint-content img {
+.waypoint-content img, .waypoint-content iframe {
     display: block;
     margin: 40px auto;
 }

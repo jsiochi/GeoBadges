@@ -47,7 +47,8 @@ function createPathway(req, res) {
         standards: req.body.standards,
         tags: req.body.tags,
         badge: req.body.badge,
-        badgeImg: req.body.badgeImg
+        badgeImg: req.body.badgeImg,
+        evidenceDescription: req.body.evidenceDescription
     });
     
     path.save(function (err) {
@@ -80,7 +81,7 @@ function updatePathway(req, res) {
         path.tags = req.body.tags;
         path.badge = req.body.badge;
         path.badgeImg = req.body.badgeImg;
-        
+        path.evidenceDescription = req.body.evidenceDescription;
         
         path.save(function(err) {
             if(err) {

@@ -1,9 +1,9 @@
 angular.module('app.create')
     .controller('CreateController', CreateController);
 
-CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal'];
+CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce'];
 
-function CreateController(pathwayService, badgeService, $stateParams, $state, $modal) {
+function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce) {
     var vm = this;
 
     vm.guidePart = 'define'; //can be 'define', 'badge', or 'waypoint'
@@ -95,9 +95,10 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         var formData = new FormData();
         formData.append('file', vm.myFile);
         formData.append('title', vm.pathway.title);
-        formData.append('short_description', vm.pathway.description);
-        formData.append('description', vm.pathway.longDescription);
+        formData.append('short_description', vm.pathway.description.substring(0,499));
+        formData.append('description', vm.pathway.longDescription.substring(0,499));
         formData.append('categories', tagsToList(vm.pathway.tags));
+        formData.append('require_claim_evidence_description', vm.pathway.evidenceDescription.substring(0,499));
         
         var reader = new FileReader();
         
@@ -209,8 +210,13 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     vm.addElement = function(waypoint, type) {
         var toAdd = '';
+        var msg = 'Enter link to add for ' + type + ':';
         
-        var source = prompt('Enter link to add for ' + type + ':');
+        if(type == 'video') {
+            msg = 'Enter embed link for video: ';
+        }
+        
+        var source = prompt(msg);
         
         switch(type) {
             case 'URL':
@@ -220,14 +226,19 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
                 toAdd = '<img src="' + source + '"/>';
                 break;
             case 'video':
+                toAdd = source;
                 break;
             default:
-                //what?
+                //do nothing
         }
         
         if(source != null) {
             vm.waypoints[waypoint].content = vm.waypoints[waypoint].content + toAdd + ' ';
         }
+    };
+    
+    vm.trustContent = function(content) {
+        return $sce.trustAsHtml(content);
     };
     
     function setBadgeImage() {

@@ -41,7 +41,7 @@
     </div>
     <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'waypoint'">
         <h2>{{creator.waypoints[creator.currentWaypoint].text}}</h2>
-        <p class="waypoint-content" ng-bind-html="creator.waypoints[creator.currentWaypoint].content"></p>
+        <p class="waypoint-content" ng-bind-html="creator.trustContent(creator.waypoints[creator.currentWaypoint].content)"></p>
     </div>
     <div class="col-lg-10 section-container" ng-if="creator.guidePart === 'badge'">
         <h2>Earn Badge</h2>
@@ -58,6 +58,9 @@
                     <label for="pahtway-title" class="col-sm-4 control-label">Credly Password</label>
                     <div class="col-sm-8">
                         <input type="password" class="form-control" ng-model="creator.pass" id="pathway-title" placeholder="Password"/>
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-4">
+                        {{creator.pathway.evidenceDescription}}
                     </div>
                     <label for="pahtway-title" class="col-sm-4 control-label">Evidence URL</label>
                     <div class="col-sm-8">

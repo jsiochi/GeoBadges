@@ -1,9 +1,9 @@
 angular.module('app.create')
     .controller('BadgeController', BadgeController);
 
-BadgeController.$inject = ['$modalInstance', 'badgeService', 'badgeData', '$scope'];
+BadgeController.$inject = ['$modalInstance', 'badgeService', 'badgeData', '$scope', '$sce'];
 
-function BadgeController($modalInstance, badgeService, badgeData, $scope) {
+function BadgeController($modalInstance, badgeService, badgeData, $scope, $sce) {
     console.log(badgeData);
     
     if(angular.isDefined(badgeData.badge)) {
@@ -79,7 +79,7 @@ function BadgeController($modalInstance, badgeService, badgeData, $scope) {
         return tagList;
     }
     
-    /*badgeService.getBadgeBuilder().success(function(response) {
+    badgeService.getBadgeBuilder().success(function(response) {
         console.log(response.badgeBuilderRef);
         $scope.builderUrl = $sce.trustAsResourceUrl(response.badgeBuilderRef);
     });
@@ -94,12 +94,12 @@ function BadgeController($modalInstance, badgeService, badgeData, $scope) {
             
             //$scope.myData = {};
 
-            myBadge.imageUrl = $scope.myData.image;
-            myBadge.iconInfo = $scope.myData.iconMetadata;
-            myBadge.extraParameters = $scope.myData.packagedData;
+            //myBadge.imageUrl = $scope.myData.image;
+            //myBadge.iconInfo = $scope.myData.iconMetadata;
+            //myBadge.extraParameters = $scope.myData.packagedData;
 
             // Remove the badge builder
             //document.getElementById("badge-builder").remove();
         }
-    });*/
+    });
 }
