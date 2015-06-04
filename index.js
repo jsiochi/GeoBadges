@@ -8,6 +8,7 @@ var db = require('./config/db');
 
 var credlyRoutes = require('./routes/credly');
 var pathwayRoutes = require('./routes/pathways');
+var mailRoutes = require('./routes/mail');
 
 var port = process.env.PORT || 8080;
 
@@ -49,6 +50,8 @@ router.put('/api/credlybadge/:badge_id', credlyRoutes.updateBadge);
 router.get('/api/credlybadge/:badge_id', credlyRoutes.getBadge);
 router.get('/api/credlybadgebuilder', credlyRoutes.getBadgeBuilderURL);
 router.post('/api/credlybadge/claim', credlyRoutes.claimBadge);
+
+router.post('/app/mailto', mailRoutes.mailInfoTo);
 
 app.use('/', router);
 

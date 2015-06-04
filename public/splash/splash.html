@@ -1,4 +1,4 @@
-<div id="home">
+<div id="home" ng-controller="SplashController as splash">
     <header class="navbar navbar-inverse gb" role="banner">
         <div class="container">
             <div class="navbar-header">
@@ -120,8 +120,8 @@
 							Sign up for the newsletter and we'll inform you of updates, offers and more.
 						</p>
 						<form>
-							<input type="text" name="email" class="form-control" placeholder="Your email address">
-							<input type="submit" value="Sign up">
+							<input type="text" name="email" class="form-control" placeholder="Your email address" ng-model="splash.address">
+							<input type="submit" value="Sign up" ng-click="splash.mail(splash.address)">
 						</form>
 					</div>
 <!--
