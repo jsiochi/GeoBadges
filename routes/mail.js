@@ -15,7 +15,7 @@ var transporter = nodemailer.createTransport({
 function mailInfoTo(req, res) {
     var mailOptions = {
         from: 'GeoBadges Signup <geobadges.mailer@gmail.com>',
-        to: 'info@geobadges.org',
+        to: 'marino@mapstory.org',
         subject: 'Request for GeoBadges Info',
         text: req.body.name + ' would like to know more about GeoBadges. Please add ' + req.body.address + ' to the email list.',
         html: req.body.name + ' would like to know more about <b>GeoBadges</b>. Please add ' + req.body.address + ' to the email list.'
