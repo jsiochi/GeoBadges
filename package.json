@@ -10,7 +10,8 @@
         "body-parser" : "^1.4.2",
         "method-override" : "^2.3.0",
         "request" : "^2.53.0",
-        "formidable" : "^1.0.17"
+        "formidable" : "^1.0.17",
+	"nodemailer" : "^1.3.4"
     },
     "engines": {
         "node": "0.10.x"

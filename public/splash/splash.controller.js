@@ -6,9 +6,13 @@ SplashController.$inject = ['mailService'];
 function SplashController(mailService) {
     var vm = this;
     
-    vm.mail = function(address) {
-        mailService.mailInfo('Jeremiah', address).success(function(response) {
+    vm.successMessage = '';
+    
+    vm.mail = function(name, address) {
+        vm.successMessage = 'Sending...';
+        mailService.mailInfo(name, address).success(function(response) {
             console.log(response);
+            vm.successMessage = 'Thanks for joining! We are glad to inform you of any future updates.'
         });
     };
 }
