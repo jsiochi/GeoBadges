@@ -53,6 +53,18 @@ router.post('/api/credlybadge/claim', credlyRoutes.claimBadge);
 
 router.post('/app/mailto', mailRoutes.mailInfoTo);
 
+//app.use('/*', express.static(__dirname + '/public'));
+
+//router.all('/', function(req, res, next) {
+//    console.log(req.url);
+//    res.sendFile(__dirname + '/public/index.html');
+//});
+//
+//router.all('/*', function(req, res, next) {
+//    console.log(req.url);
+//    res.sendFile(__dirname + '/public' + req.url);
+//});
+
 app.use('/', router);
 
 app.listen(port);

@@ -11,7 +11,7 @@ angular.module('app', [
     'ngTagsInput',
     'ngSanitize'
 ])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 //    $urlRouterProvider.otherwise('');
     
     $stateProvider.state('splash', {
@@ -42,4 +42,6 @@ angular.module('app', [
         url: '/contribute',
         templateUrl: 'contribute/contribute.html'
     });
+    
+    //$locationProvider.html5Mode(true);
 });

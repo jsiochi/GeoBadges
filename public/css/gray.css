@@ -1,0 +1,248 @@
+/* Blue - dimgray */
+
+a:link,a:visited{
+	color:dimgray;
+}
+
+::-moz-selection {
+    background: dimgray;
+    text-shadow: none;
+}
+
+::selection {
+    background: dimgray;
+    text-shadow: none;
+}
+
+
+.navbar-default a.navbar-brand:hover,
+.navbar-default a.navbar-brand:active{
+	color:dimgray;
+}
+
+.navbar-default .navbar-nav>li>a:hover, 
+.navbar-default .navbar-nav>li>a:focus,a:hover,a:active,.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:hover, 
+.navbar-default .navbar-nav>.active>a:focus{
+	color:dimgray;
+
+}
+
+.nav-effect a:hover::before,
+.nav-effect a:focus::before {
+  color: dimgray;
+  text-shadow: 10px 0 dimgray, -10px 0 dimgray;
+}
+
+.spacer,.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus,#grid .mix .overlay,.follow {
+background: dimgray;
+}
+
+.planContainer .button a.bestPlanButton,
+.planContainer .price p.bestPlanPrice,
+.planContainer .button a.bestPlanButton {
+  background: dimgray;
+  border: 2px solid dimgray;
+}
+
+.planContainer .button a.bestPlanButton:hover {
+  background: dimgray;
+  border: 2px solid dimgray;
+}
+
+.flex-control-paging li a:hover { background: dimgray; }
+.flex-control-paging li a.flex-active { background: dimgray;}
+
+.home-slides li span{
+	color:dimgray;
+}
+
+.nav-pills>li>a:hover,
+.nav-pills>li.active>a{
+	background: dimgray;
+	border: 2px solid dimgray;
+	color:#fff;
+}
+
+#page-contact{
+	background: dimgray;
+	color:#fff;
+}
+
+#page-contact .spacer{
+	background: #fff;
+}
+
+#page-contact .section-title{
+	color:#fff;
+}
+
+.btn.btn-default{
+   background: dimgray;
+}
+
+.btn.btn-default:hover,
+.btn.btn-default:active{
+    color:dimgray;
+}
+
+
+.hi-icon-effect-1 .hi-icon {
+	background: dimgray;
+}
+
+.hi-icon-effect-1 .hi-icon:after {
+	box-shadow: 0 0 0 4px dimgray;
+}
+
+.no-touch .hi-icon-effect-1 .hi-icon:hover {
+	
+}
+
+
+
+.service-block .service-icon{
+   box-shadow: 0px 0px 0px 3px dimgray;
+    background: dimgray;
+}
+
+.service-icon i{
+		color:#fff;
+
+}
+
+.service-block h3{
+	color:dimgray;
+}
+
+.service-block:hover{
+	background: dimgray;
+}
+
+.service-block:hover .service-icon{
+	background:#fff;
+}
+
+.service-block:hover .service-icon i{
+	color:dimgray;
+}
+
+.service-block:hover  h3,
+.service-block:hover  p,
+.service-block:hover ul li{
+	color:#fff;
+}
+
+.service-block:hover  ul li{
+	 border-bottom: solid thin #fff;
+}
+
+.highlight{
+	background: dimgray;
+	color:#fff;
+}
+
+.highlight h2{
+	color:#fff;
+}
+
+blockquote i{
+	color:dimgray;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+.navbar{
+    width:100%;
+}
+
+.navbar-default {
+    border: none;
+    text-transform: uppercase;
+    display: inline-block;
+    position:fixed;
+    background-color: white;
+    color:black;
+    border-bottom: 2px solid dimgray;
+}
+
+.navbar-nav{
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    float: right;
+    font-size: 1em;
+    
+}
+
+.navbar-default .navbar-nav>li>a{
+  padding-top:20px;
+  height:60px;
+}
+
+
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:hover, 
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>li>a:hover, 
+.navbar-default .navbar-nav>li>a:focus {
+      background-color:gainsboro;
+}
+
+.navbar-default .navbar-brand {
+  color:dimgray;
+  margin: 5px 0;
+  font-size: 30px;
+  font-family: 'PT Sans Narrow', sans-serif;
+  line-height: 40px;
+  padding: 5px 0 0 0;
+
+}
+
+.navbar-default a.navbar-brand {
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  transition: color 0.5s;
+
+  }
+
+.navbar-collapse.in{
+  float:none;
+  text-align:center;
+}
+
+
+.nav-effect a {
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.nav-effect a::before {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  color: transparent;
+  content: '-';
+  text-shadow: 0 0 transparent;
+  font-size: 1.2em;
+  -webkit-transition: text-shadow 0.3s, color 0.3s;
+  -moz-transition: text-shadow 0.3s, color 0.3s;
+  transition: text-shadow 0.3s, color 0.3s;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+
+
+.navbar-collapse.in .navbar-nav{
+  width: 100%;
+}
+
+
+
+

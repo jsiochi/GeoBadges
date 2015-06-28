@@ -6,20 +6,29 @@ var badgeDataSchema = mongoose.Schema({});
 
 var pathwaySchema = new Schema({
     title: String,
+    creator: String,
+    purpose: String,
     description: String,
-    longDescription: String,
-    authorNotes: String,
-    materials: String,
+    criteria: String,
+    evidenceDescription: String,
+    longDescription: String, //<--DEPRECATED
+    assessment: String,
+    authorNotes: String, //<--DEPRECATED
+    materials: String, //<--DEPRECATED
+    minimumRequirements: String,
+    timeToEarn: String,
     targetAges: {},
     subjectAreas: String,
     environments: String,
     standards: [{text: String}],
-    tags: [{text: String}],
+    tags: [{text: String}], //<--DEPRECATED
+    platformPathway: String,
+    coursePathway: String,
+    certPathway: String,
     dateCreated: {type: Date, default: Date.now},
     visible: {type: Boolean, default: false},
     badge: Number,
     badgeImg: {type: String, default: ''},
-    evidenceDescription: String,
     waypoints: [
         {
             text: String,

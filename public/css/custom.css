@@ -1,0 +1,306 @@
+.btn-dropdown {
+  color: dimgray;
+  font-size: 22px;
+  border-radius: 0;
+  background-color: #f7f7f7;
+  border-bottom: 3px solid transparent;
+  margin: 0 5px;
+}
+.btn-dropdown:focus,
+.btn-dropdown.focus {
+  color: dimgray;
+  border-bottom: 3px solid dimgray;
+  border-radius: 0;
+  background-color: #f7f7f7;
+}
+.btn-dropdown:hover {
+  color: dimgray;
+  border-bottom: 3px solid dimgray;
+  border-radius: 0;
+  background-color: #f7f7f7;
+}
+.btn-dropdown:active,
+.btn-dropdown.active,
+.open > .dropdown-toggle.btn-dropdown {
+  color: dimgray;
+  border-bottom: 3px solid dimgray;
+  border-radius: 0;
+  background-color: gainsboro;
+  box-shadow: none;
+}
+.btn-dropdown:active:hover,
+.btn-dropdown.active:hover,
+.open > .dropdown-toggle.btn-dropdown:hover,
+.btn-dropdown:active:focus,
+.btn-dropdown.active:focus,
+.open > .dropdown-toggle.btn-dropdown:focus,
+.btn-dropdown:active.focus,
+.btn-dropdown.active.focus,
+.open > .dropdown-toggle.btn-dropdown.focus {
+  color: dimgray;
+  border-bottom: 3px solid dimgray;
+  border-radius: 0;
+  background-color: gainsboro;
+}
+.btn-dropdown:active,
+.btn-dropdown.active,
+.open > .dropdown-toggle.btn-dropdown {
+  color: dimgray;
+  border-bottom: 3px solid dimgray;
+  border-radius: 0;
+  background-color: gainsboro;
+}
+
+.dropup,
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle:focus {
+  outline: 0;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #f7f7f7;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  border: none;
+  border-radius: 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.dropdown-menu > li {
+    border-bottom: 1px solid dimgray;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  font-size: 1.3em;
+  line-height: 2;
+  color: #333;
+  white-space: nowrap;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #262626;
+  text-decoration: none;
+  background-color: gainsboro;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: gainsboro;
+  text-decoration: none;
+  background-color: #337ab7;
+  outline: 0;
+}
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  color: #777;
+}
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.open > .dropdown-menu {
+  display: block;
+}
+.open > a {
+  outline: 0;
+}
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu-left {
+  right: auto;
+  left: 0;
+}
+.dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #777;
+  white-space: nowrap;
+}
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+}
+.pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+.dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+  content: "";
+  border-top: 0;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid \9;
+}
+.dropup .dropdown-menu,
+.navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 2px;
+}
+@media (min-width: 768px) {
+  .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+  .navbar-right .dropdown-menu-left {
+    right: auto;
+    left: 0;
+  }
+}
+
+.input-group-lg> .input-group-addon {
+    padding: 0;
+    border: none;
+    font-size: 22px;
+    background-color: #f7f7f7;
+}
+
+.input-group-lg > .form-control {
+    background-color: #f7f7f7;
+    border-bottom:2px solid dimgray;
+    height: 53px;
+    color: dimgray;
+    font-size: 22px;
+}
+
+.form-control:focus, .form-control:active{
+    border-bottom:2px solid dimgray;
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.content-title {
+    text-align: left;
+    padding: 10px 0;
+}
+
+.content-subtitle {
+    text-align: left;
+    font-size: 1.3em;
+    padding: 0px 0px 10px;
+}
+
+.col-badge {
+    display: inline-block;
+    width:17.5%;
+    margin:0px 1%;
+}
+
+.badge-meta {
+    text-align: right;
+}
+
+.badge-meta h3{
+    margin:0px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.badge-meta h3 small{
+    font-size: .7em;
+    color:lightgray
+}
+
+.badge-meta h3:hover{
+    border-bottom: 1px solid dimgray;
+}
+
+
+.nav-sidebar { 
+    width: 100%;
+    padding: 30px 0; 
+}
+.nav-sidebar a {
+    text-align: left;
+    color: #333;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-bottom: 1px solid dimgray;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+.nav-sidebar .active a { 
+    cursor: default;
+    background-color: dimgray; 
+    color: #fff; 
+    font-size: 1.7em;
+}
+.nav-sidebar .active a:hover {
+    background-color: dimgray;   
+}
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis; 
+}
+
+a {
+    cursor: pointer;
+}
+
+.progress {
+    box-shadow: none;
+    background-color: gainsboro;
+    height: 2px;
+}
+
+.progress-bar-default {
+    background-color: dimgray;
+}
+
+.text-style {
+    text-align: left;
+}
+
+.resource {
+    padding: 40px 0 0;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+.waypoint-content img,
+.waypoint-content iframe {
+    display: block;
+    margin: 40px auto;
+}

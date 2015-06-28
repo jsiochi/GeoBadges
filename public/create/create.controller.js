@@ -97,7 +97,7 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         formData.append('title', vm.pathway.title);
         formData.append('short_description', vm.pathway.description.substring(0,499));
         formData.append('description', vm.pathway.longDescription.substring(0,499));
-        formData.append('categories', tagsToList(vm.pathway.tags));
+        formData.append('categories', vm.tagsToList(vm.pathway.tags));
         formData.append('require_claim_evidence_description', vm.pathway.evidenceDescription.substring(0,499));
         
         var reader = new FileReader();
@@ -177,15 +177,15 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
             console.log(response);
         });
     }
-    
-    function tagsToList(tags) {
+ 
+    vm.tagsToList = function(tags) {
         var tagList = '';
         
         angular.forEach(tags, function(tag) {
             tagList = tagList + tag.text + ', ';
         });
         
-        return tagList;
+        return tagList.substring(0, tagList.length - 2);
     }
     
     vm.editBadge = function () {

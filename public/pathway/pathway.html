@@ -1,5 +1,6 @@
 <ng-include src="'../header/header.html'"></ng-include>
-<div class="container-fluid" ng-controller="CreateController as creator">
+<div ng-controller="CreateController as creator">
+<!--
     <div class="col-lg-2">
         <div class="pathway-guide">
             <div class="waypoint" ng-class="{'waypoint-active': creator.guidePart === 'define'}" ng-click="creator.changePart('define', 0)"><span class="waypoint-text"><b>{{creator.pathway.title}}</b></span></div>
@@ -71,4 +72,127 @@
             <button type="button" class="btn btn-default" ng-click="creator.claim()">Claim This Badge</button>
         </div>
     </div>
+</div>
+-->
+    <section id="page-services" class="page-services" style="padding-top:30px">
+       <div class="container" style="padding-bottom:10px" ng-if="creator.guidePart === 'define'">
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="img-responsive" ng-src="{{creator.badgeImage}}" alt="Sorry, no badge exists for this pathway" style="height: 200px"/>
+                    <div class="badge-meta">
+                        <h3><small>grade</small><br/>{{creator.pathway.targetAges}} </h3>
+                        <h3><small>subject area</small><br/>{{creator.pathway.subjectAreas}}</h3>
+                        <h3><small>learning environment</small><br/>{{creator.pathway.environments}}</h3>
+                    </div>
+                    <br>
+                    <button class="btn btn-default btn-block" ng-click="creator.changePart('waypoint', 0)">
+                        Start Lesson
+                    </button>
+                </div>
+                <div class="col-md-9">
+                <header class="section-header" style="margin-bottom:15px;border-bottom:2px solid gainsboro">
+                    <h2 class="section-title content-title"><span>{{creator.pathway.title}}</span></h2>
+                </header>
+                
+                <h3 class="content-title"><span>Course Description</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.longDescription}}</p>
+                 
+                <h3 class="content-title"><span>Evidence Description</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.evidenceDescription}}</p>
+                 
+                <h3 class="content-title"><span>Author's Notes</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.authorNotes}}</p>
+                 
+                <h3 class="content-title"><span>Materials and Requirements</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.materials}}</p>
+                
+                <h3 class="content-title"><span>Standards</span></h3>
+                <p class="section-subtitle content-subtitle"><i>{{creator.tagsToList(creator.pathway.standards)}}</i></p>
+                
+                <h3 class="content-title"><span>Tags</span></h3>
+                    <p class="section-subtitle content-subtitle">{{creator.tagsToList(creator.pathway.tags)}}</p>
+                    
+
+                </div>
+            </div>
+        </div>
+        <div class="container" style="padding-bottom:10px" ng-if="creator.guidePart === 'waypoint' || creator.guidePart === 'badge'">
+            <div class="row">
+                <div class="col-md-3">
+                    <button class="btn btn-default btn-block" ng-click="creator.changePart('define', 0)">
+                        Back to Overview
+                    </button>  
+                    <nav class="nav-sidebar">
+                        <ul class="nav tabs" style="max-height:450px;overflow-y:scroll">
+                            <li ng-repeat="waypoint in creator.waypoints" ng-class="{'active': creator.guidePart === 'waypoint' && creator.currentWaypoint === waypoint.index}" ng-click="creator.changePart('waypoint', waypoint.index)">
+                                <a>
+                                    Step {{waypoint.index + 1}} of {{creator.pathway.waypoints.length + 1}}
+                                    <br>
+                                    <small>{{waypoint.text}}</small>
+                                </a>
+                            </li>
+                            <li ng-class="{'active': creator.guidePart === 'badge'}" ng-click="creator.changePart('badge', 0)">
+                                <a>
+                                    Step {{creator.pathway.waypoints.length + 1}} of {{creator.pathway.waypoints.length + 1}}
+                                    <br>
+                                    <small>Earn Badge</small>
+                                </a>
+                            </li>  
+                        </ul>
+                    </nav>
+                </div>
+                <!-- tab content -->
+                <div class="col-md-9">
+                    <div class="tab-content" ng-if="creator.guidePart === 'waypoint'">
+                        <header class="section-header" style="margin-bottom:15px">
+                            <h3 class="section-title content-title"><span>{{creator.pathway.title}}</span></h3>
+                        </header>
+                        <div class="tab-pane active text-style">
+                            <div class="progress">
+                                <div data-percentage="0%" style="width: 10%;" class="progress-bar progress-bar-default" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h3>{{creator.waypoints[creator.currentWaypoint].text}}</h3>
+                            <p class="waypoint-content" ng-bind-html="creator.trustContent(creator.waypoints[creator.currentWaypoint].content)">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tab-content" ng-if="creator.guidePart === 'badge'">
+                        <header class="section-header" style="margin-bottom:15px">
+                            <h3 class="section-title content-title"><span>Earn Badge for {{creator.pathway.title}}</span></h3>
+                        </header>
+                        <div class="tab-pane active text-style">
+                            <div class="progress">
+                                <div data-percentage="0%" style="width: 10%;" class="progress-bar progress-bar-default" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <img class="pathway-img-lg" ng-src="{{creator.badgeImage}}" alt="Sorry, no badge exists for this pathway"/>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                            <label for="pahtway-title" class="col-sm-4 control-label">Credly Username</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="creator.user" id="pathway-title" placeholder="Username"/> 
+                                            </div>
+                                            <label for="pahtway-title" class="col-sm-4 control-label">Credly Password</label>
+                                            <div class="col-sm-8">
+                                                <input type="password" class="form-control" ng-model="creator.pass" id="pathway-title" placeholder="Password"/>
+                                            </div>
+                                            <div class="col-sm-8 col-sm-offset-4">
+                                                 {{creator.pathway.evidenceDescription}}
+                                            </div>
+                                            <label for="pahtway-title" class="col-sm-4 control-label">Evidence URL</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="creator.evidence" id="pathway-title" placeholder="Evidence URL"/>
+                                            </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-default" ng-click="creator.claim()">Claim This Badge</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </section>
 </div>

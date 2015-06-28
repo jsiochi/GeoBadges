@@ -48,7 +48,16 @@ function createPathway(req, res) {
         tags: req.body.tags,
         badge: req.body.badge,
         badgeImg: req.body.badgeImg,
-        evidenceDescription: req.body.evidenceDescription
+        evidenceDescription: req.body.evidenceDescription/*,
+        creator: req.body.creator,
+        purpose: req.body.purpose,
+        criteria: req.body.criteria,
+        assessment: req.body.assessment,
+        minimumRequirements: req.body.minimumRequirements,
+        timeToEarn: req.body.timeToEarn,
+        platformPathway: req.body.platform,
+        coursePathway: req.body.coursePathway,
+        certPathway: req.body.certPathway*/
     });
     
     path.save(function (err) {
@@ -82,6 +91,16 @@ function updatePathway(req, res) {
         path.badge = req.body.badge;
         path.badgeImg = req.body.badgeImg;
         path.evidenceDescription = req.body.evidenceDescription;
+        
+        /*path.creator: req.body.creator;
+        path.purpose: req.body.purpose;
+        path.criteria: req.body.criteria;
+        path.assessment: req.body.assessment;
+        path.minimumRequirements: req.body.minimumRequirements;
+        path.timeToEarn: req.body.timeToEarn;
+        path.platformPathway: req.body.platform;
+        path.coursePathway: req.body.coursePathway;
+        path.certPathway: req.body.certPathway;*/
         
         path.save(function(err) {
             if(err) {

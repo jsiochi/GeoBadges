@@ -1,4 +1,5 @@
 <ng-include src="'../header/header.html'"></ng-include>
+<!--
 <h2 class="text-center" style="margin-bottom: 15px;">Explore Lesson Pathways</h2>
 <div ng-controller="ExploreController as explore">
     <div class="container-fluid">
@@ -42,6 +43,7 @@
                 </div>
             </div>
         </div>
+-->
 <!--
         <div class="row">
             <div class="col-md-4 text-right"><img class="pathway-img" src="images/ags.png"/></div>
@@ -50,5 +52,66 @@
             </div>
         </div>
 -->
+<section ng-controller="ExploreController as explore" id="page-services" class="page-services" style="padding-top:0px">
+    <div class="container">
+        <header class="section-header">
+            <div class="section-subtitle">
+                <div class="btn-toolbar">
+                    <div class="btn-group pull-right" dropdown>
+                        <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                            <span click-value ng-show="explore.targetAges !== explore.unselectText" ng-model="explore.targetAges">{{explore.targetAges}}</span>
+                            <span ng-if="!explore.isDef(explore.targetAges) || explore.targetAges === explore.unselectText">Age</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                             <li ng-repeat="age in explore.gradeList" click-set param="explore.targetAges"><a ng-click="explore.buildQuery()">{{age.desc}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group pull-right" dropdown>
+                        <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                            <span click-value ng-show="explore.subjectAreas !== explore.unselectText" ng-model="explore.subjectAreas">{{explore.subjectAreas}}</span>
+                            <span ng-if="!explore.isDef(explore.subjectAreas) || explore.subjectAreas === explore.unselectText">Subject</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="area in explore.subjectList" click-set param="explore.subjectAreas"><a ng-click="explore.buildQuery()">{{area}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group pull-right" dropdown>
+                        <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                            <span click-value ng-show="explore.environments !== explore.unselectText" ng-model="explore.environments">{{explore.environments}}</span>
+                            <span ng-if="!explore.isDef(explore.environments) || explore.environments === explore.unselectText">Learning Environment</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="env in explore.learningEnvList" click-set param="explore.environments"><a ng-click="explore.buildQuery()">{{env}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group pull-right" dropdown>
+                        <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                            Tools <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">OpenStreetMap</a></li>
+                            <li><a href="#">MapStory</a></li>
+                        </ul>
+                    </div>
+                    <div class="input-group input-group-lg pull-left">
+                       <input type="text" class="form-control" placeholder="Search here..." aria-describedby="sizing-addon1">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <a ng-repeat="pathway in explore.pathways" ui-sref="pathway({ pathway_id: pathway._id})">
+                <div class="col-md-3">
+                    <div class="service-block">
+                        <img class="img-responsive" ng-src="{{pathway.badgeImg}}"/>
+                        <h3>{{pathway.title}}</h3>
+                        <p>{{pathway.description}}</p>
+                    </div>
+                </div>
+            </a>
+            <h3 ng-if="explore.pathways.length < 1">No results found</h3>
+        </div>
     </div>
-</div>
+</section>
