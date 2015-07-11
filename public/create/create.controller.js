@@ -1,10 +1,26 @@
 angular.module('app.create')
     .controller('CreateController', CreateController);
 
-CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce'];
+CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce', 'userService'];
 
-function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce) {
+function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce, userService) {
     var vm = this;
+    vm.canEdit = false;
+    vm.canAdmin = false;
+    
+    userService.isLoggedIn().success(function(response) {
+        if(response.auth == false && !$state.is('pathway')) {
+            $state.go('explore');
+            return;
+        } else if(response.auth == true) {
+            vm.canEdit = true;
+        }
+    });
+    
+    userService.isLoggedIn('admin').success(function(response) {
+        console.log(response.auth);
+        vm.canAdmin = response.auth;
+    });
 
     vm.guidePart = 'define'; //can be 'define', 'badge', or 'waypoint'
     
@@ -55,6 +71,10 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         pathwayService.getPathway($stateParams.pathway_id).success(function(response) {
             console.log(JSON.stringify(response));
             vm.pathway = response;
+            if(vm.pathway.visible == false && !vm.canEdit) {
+                $state.go('explore');
+                return;
+            }
             vm.waypoints = vm.pathway.waypoints;
             //should move indexing out - already taken care of by creation
             indexWaypoints(vm.waypoints);
@@ -70,14 +90,14 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
             vm.waypoints = [];
         }
         var number = vm.waypoints.length
-        vm.waypoints.push({text: 'New Waypoint', content: '', index: number});
+        vm.waypoints.push({text: 'Untitled Step', content: '', index: number});
         vm.currentWaypoint = number;
         vm.savePathway();
     };
     
     vm.deleteWaypoint = function (waypointIndex, event) {
         event.stopPropagation();
-        if(!confirm('Are you sure you want to delete waypoint ' + (waypointIndex + 1) + '?')) {
+        if(!confirm('Are you sure you want to delete step ' + (waypointIndex + 1) + '?')) {
             return;
         }
         vm.waypoints.splice(waypointIndex, 1);
@@ -118,6 +138,7 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
                 //vm.pathway.badge = JSON.parse(response).data;
                 console.log(vm.pathway.badge);
                 vm.pathway.badgeImg = '';
+                vm.pathway.visible = true;
                 vm.savePathway();
             });
         } else {
@@ -160,6 +181,17 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
                 console.log(response);
             });
         }
+    };
+    
+    vm.goToPreview = function () {
+        if(confirm('Are you ready to submit this badge for review? Click OK to preview and submit.')) {
+            $state.go('pathway', {pathway_id: $stateParams.pathway_id});
+        }
+    };
+    
+    vm.submitForReview = function () {
+        vm.pathway.reviewable = true;
+        vm.savePathway();
     };
     
     vm.badgeButtonText = function () {

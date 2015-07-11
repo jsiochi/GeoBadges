@@ -15,6 +15,12 @@
                 </li>
                 <li><a ui-sref="about">Contact</a>
                 </li>
+                <li ng-controller="LoginController as login">
+                    <a ui-sref="login">
+                        <span ng-if="!login.isIn">Login</span>
+                        <span ng-if="login.isIn">Hi, {{login.currentUser() | uppercase}}</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

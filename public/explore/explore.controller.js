@@ -1,14 +1,22 @@
 angular.module('app.explore')
     .controller('ExploreController', ExploreController);
 
-ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state'];
+ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', 'userService'];
 
-function ExploreController(pathwayService, badgeService, $stateParams, $state) {
+function ExploreController(pathwayService, badgeService, $stateParams, $state, userService) {
     var vm = this;
     
     vm.unselectText = 'No Filter';
     
     vm.pathways = [];
+    
+    vm.canEdit = false;
+    
+    userService.isLoggedIn().success(function(response) {
+        if(response.auth == true) {
+            vm.canEdit = true;
+        }
+    });
     
     vm.gradeList = [{index: 0, desc: vm.unselectText},
                     {index: 1, desc: 'Grade 3-5'},

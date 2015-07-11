@@ -7,6 +7,7 @@ var badgeDataSchema = mongoose.Schema({});
 var pathwaySchema = new Schema({
     title: String,
     creator: String,
+    creatorEmail: String,
     purpose: String,
     description: String,
     criteria: String,
@@ -21,12 +22,15 @@ var pathwaySchema = new Schema({
     subjectAreas: String,
     environments: String,
     standards: [{text: String}],
-    tags: [{text: String}], //<--DEPRECATED
+    tags: [{text: String}],
+    tools: [{text: String}],
+    research: String,
     platformPathway: String,
     coursePathway: String,
     certPathway: String,
     dateCreated: {type: Date, default: Date.now},
     visible: {type: Boolean, default: false},
+    reviewable: {type: Boolean, default: false},
     badge: Number,
     badgeImg: {type: String, default: ''},
     waypoints: [

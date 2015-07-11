@@ -9,7 +9,8 @@ angular.module('app', [
     'ui.router',
     'ui.bootstrap',
     'ngTagsInput',
-    'ngSanitize'
+    'ngSanitize',
+    'ngCookies'
 ])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 //    $urlRouterProvider.otherwise('');
@@ -41,6 +42,10 @@ angular.module('app', [
     .state('contribute', {
         url: '/contribute',
         templateUrl: 'contribute/contribute.html'
+    })
+    .state('login', {
+        url: '/login',
+        templateUrl: 'login/login.html'
     });
     
     //$locationProvider.html5Mode(true);

@@ -75,10 +75,12 @@
 </div>
 -->
     <section id="page-services" class="page-services" style="padding-top:30px">
-       <div class="container" style="padding-bottom:10px" ng-if="creator.guidePart === 'define'">
+        <h1 ng-if="!creator.canAdmin && creator.pathway.reviewable == false;">You are previewing this page. Click <a ng-click="creator.submitForReview()">here</a> to submit.</h1>
+        <h1 ng-if="!creator.canAdmin && creator.pathway.reviewable == true && creator.pathway.visible == false">Your badge has been submitted. Thank you! We will notify you once it has been reviewed.</h1>
+        <div class="container" style="padding-bottom:10px" ng-if="creator.guidePart === 'define'">
             <div class="row">
                 <div class="col-md-3">
-                    <img class="img-responsive" ng-src="{{creator.badgeImage}}" alt="Sorry, no badge exists for this pathway" style="height: 200px"/>
+                    <img class="img-responsive" ng-src="{{creator.badgeImage}}" alt="A badge image will be created upon submission review" style="height: 200px"/>
                     <div class="badge-meta">
                         <h3><small>grade</small><br/>{{creator.pathway.targetAges}} </h3>
                         <h3><small>subject area</small><br/>{{creator.pathway.subjectAreas}}</h3>
@@ -94,24 +96,44 @@
                     <h2 class="section-title content-title"><span>{{creator.pathway.title}}</span></h2>
                 </header>
                 
+                <h3 class="content-title"><span>Creator</span></h3>
+                <p class="section-subtitle content-subtitle">Created by <a href="mailto:{{creator.pathway.creatorEmail}}">{{creator.pathway.creator}}</a> on {{creator.pathway.dateCreated | date: 'longDate'}}</p>
+                    
                 <h3 class="content-title"><span>Course Description</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.longDescription}}</p>
-                 
+                
+                <h3 class="content-title"><span>Purpose</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.purpose}}</p>
+                    
+                <h3 class="content-title"><span>Badge Criteria</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.criteria}}</p>
+                    
                 <h3 class="content-title"><span>Evidence Description</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.evidenceDescription}}</p>
+                    
+                <h3 class="content-title"><span>Assessment</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.assessment}}</p>
                  
                 <h3 class="content-title"><span>Author's Notes</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.authorNotes}}</p>
                  
                 <h3 class="content-title"><span>Materials and Requirements</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.materials}}</p>
+                    
+                <h3 class="content-title"><span>Time to Earn</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.timeToEarn}}</p>
                 
                 <h3 class="content-title"><span>Standards</span></h3>
                 <p class="section-subtitle content-subtitle"><i>{{creator.tagsToList(creator.pathway.standards)}}</i></p>
+                    
+                <h3 class="content-title"><span>Tools</span></h3>
+                <p class="section-subtitle content-subtitle"><i>{{creator.tagsToList(creator.pathway.tools)}}</i></p>
                 
                 <h3 class="content-title"><span>Tags</span></h3>
-                    <p class="section-subtitle content-subtitle">{{creator.tagsToList(creator.pathway.tags)}}</p>
+                <p class="section-subtitle content-subtitle">{{creator.tagsToList(creator.pathway.tags)}}</p>
                     
+                <h3 class="content-title"><span>Supporting Reasearch</span></h3>
+                <p class="section-subtitle content-subtitle"><i>{{creator.pathway.research}}</i></p>
 
                 </div>
             </div>
@@ -160,7 +182,7 @@
                         <header class="section-header" style="margin-bottom:15px">
                             <h3 class="section-title content-title"><span>Earn Badge for {{creator.pathway.title}}</span></h3>
                         </header>
-                        <div class="tab-pane active text-style">
+                        <div class="tab-pane active text-style" ng-if="!creator.canEdit">
                             <div class="progress">
                                 <div data-percentage="0%" style="width: 10%;" class="progress-bar progress-bar-default" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -189,6 +211,9 @@
                                 </div>
                                 <button type="button" class="btn btn-default" ng-click="creator.claim()">Claim This Badge</button>
                             </div>
+                        </div>
+                        <div class="tab-pane active text-style" ng-if="creator.canEdit">
+                            A form for learners to claim your badge will appear here once submitted.
                         </div>
                     </div>
                 </div>

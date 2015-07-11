@@ -1,0 +1,13 @@
+<ng-include src="'../header/header.html'"></ng-include>
+<div class="text-center col-md-2 col-md-offset-5" style="margin-top:40px" ng-controller="LoginController as login">
+    <div ng-if="!login.isIn">
+        <input type="text" class="form-control" placeholder="login id" ng-model="login.user">
+        <input type="password" class="form-control" placeholder="password" ng-model="login.pass">
+        <button type="button" class="btn btn-default" ng-click="login.authLogin(login.user, login. pass)">Login</button>
+        <div ng-if="login.badAuth" style="color: red">Incorrect username or password. Please try again.</div>
+    </div>
+    <div ng-if="login.isIn">
+        <h3>You are logged in as <i>{{login.currentUser()}}</i>. Please select an option to continue, or</h3>
+        <button type="button" class="btn btn-default" ng-click="login.logout()">Logout</button>
+    </div>
+</div>

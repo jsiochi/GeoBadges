@@ -304,3 +304,7 @@ a {
     display: block;
     margin: 40px auto;
 }
+
+input[type="file"] {
+    display: none;
+}

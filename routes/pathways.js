@@ -46,15 +46,18 @@ function createPathway(req, res) {
         environments: req.body.environments,
         standards: req.body.standards,
         tags: req.body.tags,
+        tools: req.body.tools,
         badge: req.body.badge,
         badgeImg: req.body.badgeImg,
-        evidenceDescription: req.body.evidenceDescription/*,
+        evidenceDescription: req.body.evidenceDescription,
         creator: req.body.creator,
+        creatorEmail: req.body.creatorEmail,
         purpose: req.body.purpose,
         criteria: req.body.criteria,
         assessment: req.body.assessment,
         minimumRequirements: req.body.minimumRequirements,
         timeToEarn: req.body.timeToEarn,
+        research: req.body.research/*,
         platformPathway: req.body.platform,
         coursePathway: req.body.coursePathway,
         certPathway: req.body.certPathway*/
@@ -92,12 +95,18 @@ function updatePathway(req, res) {
         path.badgeImg = req.body.badgeImg;
         path.evidenceDescription = req.body.evidenceDescription;
         
-        /*path.creator: req.body.creator;
-        path.purpose: req.body.purpose;
-        path.criteria: req.body.criteria;
-        path.assessment: req.body.assessment;
-        path.minimumRequirements: req.body.minimumRequirements;
-        path.timeToEarn: req.body.timeToEarn;
+        path.tools = req.body.tools;
+        path.creator = req.body.creator;
+        path.creatorEmail = req.body.creatorEmail;
+        path.purpose = req.body.purpose;
+        path.criteria = req.body.criteria;
+        path.assessment = req.body.assessment;
+        path.minimumRequirements = req.body.minimumRequirements;
+        path.timeToEarn = req.body.timeToEarn;
+        path.research = req.body.research;
+        path.visible = req.body.visible;
+        path.reviewable = req.body.reviewable;
+        /*
         path.platformPathway: req.body.platform;
         path.coursePathway: req.body.coursePathway;
         path.certPathway: req.body.certPathway;*/
