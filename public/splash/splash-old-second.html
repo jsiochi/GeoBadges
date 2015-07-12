@@ -1,0 +1,146 @@
+<div id="home" ng-controller="SplashController as splash">
+    <header class="navbar navbar-inverse gb" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">GeoBadges</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="explore">Explore Badge Pathways</a>
+                    </li>
+                    <li><a ui-sref="contribute">Contribute</a>
+                    </li>
+                    <li><a ui-sref="about">Sponsor</a>
+                    </li>
+                    <li><a ui-sref="about">About</a>
+                    </li>
+                    <li><a ui-sref="about">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="gb">
+        <div class="container">
+            <h1 class="gb-text">Join a community of educators, geographers and technologists helping students harness the power of mapping to engage their world.</h1>
+            <iframe class="img" src="//player.vimeo.com/video/122156692?portrait=0&badge=0&byline=0" width="380" height="250" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+    </div>
+    <div id="gb-points">
+        <div class="container">
+            <div class="row gb-point" id="explore-point">
+                <div class="col-md-9 info">
+                    <h4>1. Explore and Earn</h4>
+                    <p>GeoBadges give teachers ideas and clear guidance on how to integrate fun and meaningful mapping projects into their curriculum. Start earning now!</p>
+                </div>
+                <div class="col-md-3 image">
+                    <img src="../images/geobadge.png">
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row gb-point backwards">
+                <div class="col-md-8 info">
+                    <h4>2. Create and Share</h4>
+                    <p>Are you a teacher or geography professional with a mapping project idea to share with other teachers? If so, apply for Contributor Status and start creating GeoBadges of your own...</p>
+                </div>
+                <div class="col-md-4 image">
+                    <img src="../images/teach.png">
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row gb-point">
+                <div class="col-md-9 info">
+                    <h4>3. Help GeoBadges Grow</h4>
+                    <p>GeoBadges is a community-driven open educational resource convened by the American Geographical Society - the oldest geography organization in the United States - and led by a growing network of <a ui-sref="about">Content Experts</a>. <a ui-sref="about">Donate now</a> to help GeoBadges impact as many aspiring learners as possible!</p>
+                </div>
+                <div class="col-md-3 image">
+                    <img src="../images/donate.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="sponsors">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Sponsors</h3>
+					<p>
+						Here's the organizations working to bring GeoBadges to life. <a ui-sref="about">Join Them.</a>
+					</p>
+					<div class="logos">
+                        <img src="../images/ags.png">
+						<img src="../images/mapstory.png">
+						<img src="../images/longview.png">
+						<img src="../images/GeoMakers.png">
+<!--
+						<img src="../images/storymapjs.jpg">
+						<img src="../images/thatclasslogo.jpg">
+-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div id="footer-white">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3 menu">
+					<ul>
+	      				<li>
+	          				<a ui-sref="explore">Badge Pathways</a>
+	        			</li>
+	        			<li>
+	        				<a ui-sref="contribute">Contribute</a>
+	        			</li>
+	      			</ul>
+				</div>
+				<div class="col-sm-3 menu">
+					<ul>
+	      				<li>
+	          				<a ui-sref="about">About us</a>
+	        			</li>
+	        			<li>
+	        				<a ui-sref="about">Contact us</a>
+	        			</li>
+	        			<li>
+	          				<a ui-sref="about">Sponsor Us</a>
+	        			</li>
+	      			</ul>
+				</div>
+				<div class="col-sm-2 menu">
+					<ul>
+	        			<li>
+	          				<a href="https://twitter.com/geobadges">Twitter</a>
+	        			</li>
+	      			</ul>
+				</div>
+				<div class="col-sm-4 newsletter">
+					<div class="signup clearfix">
+						<p>
+							Sign up for the GeoBadges mailing list and we'll inform you of any updates.
+						</p>
+						<form>
+							<input type="text" name="email" class="form-control" placeholder="Your email address" ng-model="splash.address">
+                            <input type="text" name="emailname" class="form-control" placeholder="Your name" ng-model="splash.emailName">
+                            <button type="button" class="btn-btn-default" ng-click="splash.mail(splash.emailName, splash.address)">Sign Up</button>
+						</form>
+                        <p>{{splash.successMessage}}</p>
+					</div>
+<!--
+					<a href="#">
+						<img src="images/social/social-tw.png" alt="twitter">
+					</a>
+					<a href="#">
+						<img src="images/social/social-dbl.png" alt="dribbble">
+					</a>
+-->
+				</div>
+			</div>
+			<div class="row credits">
+				<div class="col-md-12">
+					Copyright © 2014. GeoBadges | Web Design - Jeremiah Siochi | dollar by Aha-Soft from the Noun Project | Teacher by Jaclyne Ooi from the Noun Project 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

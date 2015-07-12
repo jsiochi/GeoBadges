@@ -145,7 +145,7 @@ h1,h2,h3,h4,h5,h6{
 
 #page-welcome{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -277,7 +277,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .parallax-background1 {
-  background-image: url(../img/backgrounds/4.jpg);
+  background-image: url(../images/backgrounds/4.jpg);
 }
 
 
@@ -308,7 +308,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .overlay {
-  background: url(../img/overlays/05.png);
+  background: url(../images/overlays/05.png);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -317,7 +317,7 @@ h1,h2,h3,h4,h5,h6{
 
 
 .parallax-background2 {
-  background-image: url(../img/backgrounds/5.jpg);
+  background-image: url(../images/backgrounds/5.jpg);
 }
 
 #parallax-connect .parallax-content{
@@ -537,6 +537,7 @@ h1,h2,h3,h4,h5,h6{
 
 .service-block{
   margin:0 0 25px 0;
+  max-height: 500px;
   background: #FFF;
   -webkit-box-shadow: 5px 5px 0px 0px #E8E8E8;
   box-shadow: 5px 5px 0px 0px #E8E8E8;
@@ -570,6 +571,8 @@ h1,h2,h3,h4,h5,h6{
 .service-block p{
   padding:10px;
   text-align: center;
+  max-height: 90px;
+  overflow: hidden;
 }
 
 .service-block  ul{
@@ -946,7 +949,7 @@ html[xmlns] .slides {display: block;}
 
 
 .vegas-overlay {
-    background: transparent url(../img/overlays/16.png);
+    background: transparent url(../images/overlays/16.png);
     opacity: 0.5;
     z-index: -1;
 }
@@ -996,13 +999,13 @@ html[xmlns] .slides {display: block;}
         cursor: pointer;
 }
 .next{
-    background: url("../img/next.png");
+    background: url("../images/next.png");
     margin-right: 70px;
     right: 0;
     opacity: 0.3;
 }
 .prev{
-    background: url("../img/prev.png");
+    background: url("../images/prev.png");
     margin-left: 70px;
     left: 0;
     opacity: 0.3;

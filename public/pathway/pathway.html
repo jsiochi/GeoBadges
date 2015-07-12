@@ -74,7 +74,7 @@
     </div>
 </div>
 -->
-    <section id="page-services" class="page-services" style="padding-top:30px">
+    <section id="page-services" class="page-services" style="padding-top:120px">
         <h1 ng-if="!creator.canAdmin && creator.pathway.reviewable == false;">You are previewing this page. Click <a ng-click="creator.submitForReview()">here</a> to submit.</h1>
         <h1 ng-if="!creator.canAdmin && creator.pathway.reviewable == true && creator.pathway.visible == false">Your badge has been submitted. Thank you! We will notify you once it has been reviewed.</h1>
         <div class="container" style="padding-bottom:10px" ng-if="creator.guidePart === 'define'">

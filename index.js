@@ -14,8 +14,8 @@ var pathwayRoutes = require('./routes/pathways');
 var mailRoutes = require('./routes/mail');
 
 var users = [
-    {id: 1, username: 'creator', password: 'pass1pass'},
-    {id: 2, username: 'admin', password: 'pass2pass'}
+    {id: 1, username: 'creator', password: process.env.CREATOR_PASSWORD},
+    {id: 2, username: 'admin', password: process.env.ADMIN_PASSWORD}
 ];
 
 //Passport setup for auth session

@@ -308,3 +308,14 @@ a {
 input[type="file"] {
     display: none;
 }
+
+.service-block .glyphicon {
+    position: absolute;
+    top: 10px;
+    left: 255px;
+    color: red;
+}
+
+.service-block .glyphicon:hover {
+    color: pink;
+}

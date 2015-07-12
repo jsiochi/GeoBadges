@@ -1,3 +1,4 @@
+<!--
 <header class="header-individual navbar navbar-inverse gb" role="banner">
     <div class="container">
         <div class="navbar-header">
@@ -24,4 +25,38 @@
             </ul>
         </nav>
     </div>
-</header>
+</header>-->
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">GEOBADGES</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav nav-effect">
+                <li><a ui-sref="explore">Explore Badges</a>
+                </li>
+                <li><a ui-sref="contribute">Contribute</a>
+                </li>
+                <li><a ui-sref="about">Sponsor</a>
+                </li>
+                <li><a ui-sref="about">About</a>
+                </li>
+                <li><a ui-sref="about">Contact</a>
+                </li>
+                <li ng-controller="LoginController as login">
+                    <a ui-sref="login">
+                        <span ng-if="!login.isIn">Login</span>
+                        <span ng-if="login.isIn">Hi, {{login.currentUser() | uppercase}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>

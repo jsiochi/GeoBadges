@@ -11,11 +11,17 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
     vm.pathways = [];
     
     vm.canEdit = false;
+    vm.canAdmin = false;
     
     userService.isLoggedIn().success(function(response) {
         if(response.auth == true) {
             vm.canEdit = true;
         }
+    });
+    
+    userService.isLoggedIn('admin').success(function(response) {
+        console.log(response.auth);
+        vm.canAdmin = response.auth;
     });
     
     vm.gradeList = [{index: 0, desc: vm.unselectText},
@@ -57,6 +63,12 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
         pathwayService.queryPathways(q).success(function(response) {
             vm.pathways = response;
         });
+    };
+    
+    vm.delete = function(title, pathwayId) {
+        if(!confirm('Are you sure you want to delete the badge \'' + title + '\'?')) {
+            return;
+        }
     };
     
     pathwayService.getAllPathways().success(function(response) {

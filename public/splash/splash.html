@@ -1,146 +1,188 @@
-<div id="home" ng-controller="SplashController as splash">
-    <header class="navbar navbar-inverse gb" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">GeoBadges</a>
+<ng-include src="'../header/header.html'"></ng-include>
+
+<div class="parallax-background2 parallax-background"></div>
+<section id="page-welcome" class="page-welcome">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Text Slider -->
+                <h2 style="color:white; margin-top: 300px">
+                        Join a community of educators, geographers and technologists helping students harness the power of mapping to engage their world.
+                    </h2>
+                <!-- End Text Slides -->
+                <a ui-sref="about" class="btn btn-default learn-more"><span data-hover="Learn More">Learn More</span></a>
             </div>
-            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="explore">Explore Badge Pathways</a>
-                    </li>
-                    <li><a ui-sref="contribute">Contribute</a>
-                    </li>
-                    <li><a ui-sref="about">Sponsor</a>
-                    </li>
-                    <li><a ui-sref="about">About</a>
-                    </li>
-                    <li><a ui-sref="about">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <div id="gb">
-        <div class="container">
-            <h1 class="gb-text">Join a community of educators, geographers and technologists helping students harness the power of mapping to engage their world.</h1>
-            <iframe class="img" src="//player.vimeo.com/video/122156692?portrait=0&badge=0&byline=0" width="380" height="250" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <div class="col-md-6">
+                <!-- Text Slider -->
+<!--
+                <div class="flexslider ">
+                    <ul class="home-slides">
+                        <li>
+-->
+                            <style>
+                                .embed-container {
+                                    position: relative;
+                                    padding-bottom: 70%;
+                                    height: 0;
+                                    overflow: hidden;
+                                    max-width: 100%;
+                                    margin-top: 180px;
+                                }
+                                
+                                .embed-container iframe,
+                                .embed-container object,
+                                .embed-container embed {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            </style>
+                            <div class='embed-container'>
+                                <iframe src='https://player.vimeo.com/video/122156692' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<!--
+                            </div>
+                        </li>
+                    </ul>
+-->
+                </div>
+            </div>
         </div>
     </div>
-    <div id="gb-points">
-        <div class="container">
-            <div class="row gb-point" id="explore-point">
-                <div class="col-md-9 info">
-                    <h4>1. Explore and Earn</h4>
+</section>
+<!-- welcome ends -->
+
+<!-- about begins -->
+<section name="page-about" id="page-about" class="page-about">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">What is a geobadge?</h2>
+            <div class="spacer"></div>
+            <p class="section-subtitle">Lorem ipsum dolor sit amet, id iusto oportere mel. </p>
+        </header>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="research hi-icon-effect-1">
+                    <i class="hi-icon fa fa-lightbulb-o"></i>
+                </div>
+                <header class="process-header">
+                    <h3>Explore and Earn</h3>
                     <p>GeoBadges give teachers ideas and clear guidance on how to integrate fun and meaningful mapping projects into their curriculum. Start earning now!</p>
-                </div>
-                <div class="col-md-3 image">
-                    <img src="../images/geobadge.png">
-                </div>
+                </header>
             </div>
-            <div class="divider"></div>
-            <div class="row gb-point backwards">
-                <div class="col-md-8 info">
-                    <h4>2. Create and Share</h4>
+            <div class="col-md-4 text-center">
+                <div class="design hi-icon-effect-1">
+                    <i class="hi-icon fa fa-edit"></i>
+                </div>
+                <header class="process-header">
+                    <h3>Create and Share</h3>
                     <p>Are you a teacher or geography professional with a mapping project idea to share with other teachers? If so, apply for Contributor Status and start creating GeoBadges of your own...</p>
-                </div>
-                <div class="col-md-4 image">
-                    <img src="../images/teach.png">
-                </div>
+                </header>
             </div>
-            <div class="divider"></div>
-            <div class="row gb-point">
-                <div class="col-md-9 info">
-                    <h4>3. Help GeoBadges Grow</h4>
-                    <p>GeoBadges is a community-driven open educational resource convened by the American Geographical Society - the oldest geography organization in the United States - and led by a growing network of <a ui-sref="about">Content Experts</a>. <a ui-sref="about">Donate now</a> to help GeoBadges impact as many aspiring learners as possible!</p>
+            <div class="col-md-4 text-center">
+                <div class="hi-icon-effect-1 develop">
+                    <i class="hi-icon fa fa-users"></i>
                 </div>
-                <div class="col-md-3 image">
-                    <img src="../images/donate.png">
+                <header class="process-header">
+                    <h3>Help GeoBadges Grow</h3>
+                    <p>GeoBadges is a community-driven open educational resource convened by the American Geographical Society - the oldest geography organization in the United States - and led by a growing network of <a ui-sref="about">Content Experts</a>. <a ui-sref="about">Donate now</a> to help GeoBadges impact as many aspiring learners as possible!</p>
+                </header>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about ends -->
+<!-- services begins -->
+<section id="page-services" class="page-services">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title"><span>OUR PARTNERS</span></h2>
+            <div class="spacer"></div>
+            <p class="section-subtitle">Lorem ipsum dolor sit amet, id iusto oportere mel. </p>
+        </header>
+        <div class="row">
+            <div class="col-md-3 ">
+                <a>
+                    <div class="service-block">
+                        <img class="img-responsive" src="../images/ags.png" style="display: inline"/>
+                        <h3>American Geographical Society</h3>
+                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a>
+                    <div class="service-block">
+                        <img class="img-responsive" src="../images/badges/osm/osm3.png" />
+                        <h3>OpenStreetMap</h3>
+                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ">
+                <a>
+                    <div class="service-block">
+                        <img class="img-responsive" src="../images/badges/ms/ms5.png" />
+                        <h3>MapStory</h3>
+                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ">
+                <a>
+                    <div class="service-block">
+                        <img class="img-responsive" src="../images/badges/ms/ms5.png" />
+                        <h3>Longview Foundation</h3>
+                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 ">
+                <a>
+                    <div class="service-block">
+                        <img class="img-responsive" src="../images/GeoMakers.png" style="display: inline"/>
+                        <h3>GeoMakers</h3>
+                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- services ends -->
+<!-- parallax connect feed begins -->
+<section id="parallax-connect" class="parallax" style="height: 600px;" ng-controller="SplashController as splash">
+    <div class="parallax-background2 parallax-background"></div>
+    <!-- parallax bg image -->
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="parallax-content">
+                    <header class="section-header">
+                        <h2 class="section-title"><span>Get Connected</span></h2>
+                        <div class="spacer"></div>
+                        <p class="section-subtitle">Lorem ipsum dolor sit amet, id iusto oportere mel. </p>
+                    </header>
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-4">
+						  <p>
+							     Sign up for the GeoBadges mailing list and we'll inform you of any updates.
+						  </p>
+				            <input type="text" name="email" class="form-control" placeholder="Your email address" ng-model="splash.address">
+                            <input type="text" name="emailname" class="form-control" placeholder="Your name" ng-model="splash.emailName">
+                            <button type="button" class="btn btn-default" ng-click="splash.mail(splash.emailName, splash.address)">Sign Up</button>
+                            <p>{{splash.successMessage}}</p>
+					   </div>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/geobadges" class="btn btn-round btn-clear btn-twitter"><i class="fa fa-twitter"></i></a>
+                    </div>
+                    <h4 class="text-center">Copyright © 2014. GeoBadges | Web Design - Jeremiah Siochi</h4>
                 </div>
             </div>
         </div>
     </div>
-    <div id="sponsors">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Sponsors</h3>
-					<p>
-						Here's the organizations working to bring GeoBadges to life. <a ui-sref="about">Join Them.</a>
-					</p>
-					<div class="logos">
-                        <img src="../images/ags.png">
-						<img src="../images/mapstory.png">
-						<img src="../images/longview.png">
-						<img src="../images/GeoMakers.png">
-<!--
-						<img src="../images/storymapjs.jpg">
-						<img src="../images/thatclasslogo.jpg">
--->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-    <div id="footer-white">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-3 menu">
-					<ul>
-	      				<li>
-	          				<a ui-sref="explore">Badge Pathways</a>
-	        			</li>
-	        			<li>
-	        				<a ui-sref="contribute">Contribute</a>
-	        			</li>
-	      			</ul>
-				</div>
-				<div class="col-sm-3 menu">
-					<ul>
-	      				<li>
-	          				<a ui-sref="about">About us</a>
-	        			</li>
-	        			<li>
-	        				<a ui-sref="about">Contact us</a>
-	        			</li>
-	        			<li>
-	          				<a ui-sref="about">Sponsor Us</a>
-	        			</li>
-	      			</ul>
-				</div>
-				<div class="col-sm-2 menu">
-					<ul>
-	        			<li>
-	          				<a href="https://twitter.com/geobadges">Twitter</a>
-	        			</li>
-	      			</ul>
-				</div>
-				<div class="col-sm-4 newsletter">
-					<div class="signup clearfix">
-						<p>
-							Sign up for the GeoBadges mailing list and we'll inform you of any updates.
-						</p>
-						<form>
-							<input type="text" name="email" class="form-control" placeholder="Your email address" ng-model="splash.address">
-                            <input type="text" name="emailname" class="form-control" placeholder="Your name" ng-model="splash.emailName">
-							<input type="submit" value="Sign up" ng-click="splash.mail(splash.emailName, splash.address)">
-						</form>
-                        <p>{{splash.successMessage}}</p>
-					</div>
-<!--
-					<a href="#">
-						<img src="images/social/social-tw.png" alt="twitter">
-					</a>
-					<a href="#">
-						<img src="images/social/social-dbl.png" alt="dribbble">
-					</a>
--->
-				</div>
-			</div>
-			<div class="row credits">
-				<div class="col-md-12">
-					Copyright © 2014. GeoBadges | Web Design - Jeremiah Siochi | dollar by Aha-Soft from the Noun Project | Teacher by Jaclyne Ooi from the Noun Project 
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+</section>
