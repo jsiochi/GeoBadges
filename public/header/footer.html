@@ -1,0 +1,32 @@
+<section id="parallax-connect" class="parallax" style="height: 600px;" ng-controller="SplashController as splash">
+    <div class="parallax-background2 parallax-background"></div>
+    <!-- parallax bg image -->
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="parallax-content">
+                    <header class="section-header">
+                        <h2 class="section-title"><span>Get Connected</span></h2>
+                        <div class="spacer"></div>
+                    </header>
+                    <div class="row" style="padding-top: 20px;">
+                        <div class="col-md-offset-4 col-md-4">
+						  <p>
+							     Sign up for the GeoBadges mailing list and we'll inform you of any updates.
+						  </p>
+				            <input type="text" name="email" class="form-control" placeholder="Your email address" ng-model="splash.address">
+                            <input type="text" name="emailname" class="form-control" placeholder="Your name" ng-model="splash.emailName">
+                            <button type="button" class="btn btn-default" ng-click="splash.mail(splash.emailName, splash.address)">Sign Up</button>
+                            <p>{{splash.successMessage}}</p>
+					   </div>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/geobadges" class="btn btn-round btn-clear btn-twitter"><i class="fa fa-twitter"></i></a>
+                    </div>
+                    <h4 class="text-center">Copyright © 2014. GeoBadges | Web Design - Jeremiah Siochi</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

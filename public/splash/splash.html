@@ -7,9 +7,10 @@
         <div class="row">
             <div class="col-md-6">
                 <!-- Text Slider -->
+<!--                <img class="img-responsive" src="../images/geobadge.png" style="margin-top: 150px; display: inline">-->
                 <h2 style="color:white; margin-top: 300px">
                         Join a community of educators, geographers and technologists helping students harness the power of mapping to engage their world.
-                    </h2>
+                </h2>
                 <!-- End Text Slides -->
                 <a ui-sref="about" class="btn btn-default learn-more"><span data-hover="Learn More">Learn More</span></a>
             </div>
@@ -60,7 +61,7 @@
         <header class="section-header">
             <h2 class="section-title">What is a geobadge?</h2>
             <div class="spacer"></div>
-            <p class="section-subtitle">Lorem ipsum dolor sit amet, id iusto oportere mel. </p>
+            <p class="section-subtitle">GeoBadges help recognize geographic learning that occurs inside and outside the classroom - anytime, and anywhere. </p>
         </header>
         <div class="row">
             <div class="col-md-4 text-center">
@@ -87,7 +88,7 @@
                 </div>
                 <header class="process-header">
                     <h3>Help GeoBadges Grow</h3>
-                    <p>GeoBadges is a community-driven open educational resource convened by the American Geographical Society - the oldest geography organization in the United States - and led by a growing network of <a ui-sref="about">Content Experts</a>. <a ui-sref="about">Donate now</a> to help GeoBadges impact as many aspiring learners as possible!</p>
+                    <p>GeoBadges is a community-driven open educational resource convened by the American Geographical Society - the oldest geography organization in the United States. <a ui-sref="about">Donate now</a> to help GeoBadges impact as many aspiring learners as possible!</p>
                 </header>
             </div>
         </div>
@@ -98,9 +99,9 @@
 <section id="page-services" class="page-services">
     <div class="container">
         <header class="section-header">
-            <h2 class="section-title"><span>OUR PARTNERS</span></h2>
+            <h2 class="section-title"><span>Featured GeoBadges</span></h2>
             <div class="spacer"></div>
-            <p class="section-subtitle">Lorem ipsum dolor sit amet, id iusto oportere mel. </p>
+            <p class="section-subtitle">GeoBadges give teachers ideas and clear guidance on how to integrate fun and meaningful mapping projects into their curriculum. Start earning now!</p>
         </header>
         <div class="row">
             <div class="col-md-3 ">
@@ -153,36 +154,4 @@
 </section>
 <!-- services ends -->
 <!-- parallax connect feed begins -->
-<section id="parallax-connect" class="parallax" style="height: 600px;" ng-controller="SplashController as splash">
-    <div class="parallax-background2 parallax-background"></div>
-    <!-- parallax bg image -->
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="parallax-content">
-                    <header class="section-header">
-                        <h2 class="section-title"><span>Get Connected</span></h2>
-                        <div class="spacer"></div>
-                        <p class="section-subtitle">Lorem ipsum dolor sit amet, id iusto oportere mel. </p>
-                    </header>
-                    <div class="row">
-                        <div class="col-md-offset-4 col-md-4">
-						  <p>
-							     Sign up for the GeoBadges mailing list and we'll inform you of any updates.
-						  </p>
-				            <input type="text" name="email" class="form-control" placeholder="Your email address" ng-model="splash.address">
-                            <input type="text" name="emailname" class="form-control" placeholder="Your name" ng-model="splash.emailName">
-                            <button type="button" class="btn btn-default" ng-click="splash.mail(splash.emailName, splash.address)">Sign Up</button>
-                            <p>{{splash.successMessage}}</p>
-					   </div>
-                    </div>
-                    <div class="social-icons">
-                        <a href="https://twitter.com/geobadges" class="btn btn-round btn-clear btn-twitter"><i class="fa fa-twitter"></i></a>
-                    </div>
-                    <h4 class="text-center">Copyright © 2014. GeoBadges | Web Design - Jeremiah Siochi</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<ng-include src="'../header/footer.html'"></ng-include>
