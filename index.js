@@ -100,6 +100,7 @@ router.get('/api/pathway/:pathway_id', pathwayRoutes.getPathwayById);
 router.post('/api/pathways', pathwayRoutes.createPathway);
 router.put('/api/pathway/:pathway_id', pathwayRoutes.updatePathway);
 router.post('/api/pathways/find', pathwayRoutes.queryPathways);
+router.delete('/api/pathway/:pathway_id', pathwayRoutes.deletePathway);
 
 router.post('/api/credlybadge', credlyRoutes.createBadge);
 router.put('/api/credlybadge/:badge_id', credlyRoutes.updateBadge);

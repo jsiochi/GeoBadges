@@ -6,7 +6,8 @@ module.exports = {
     getPathwayById: getPathwayById,
     createPathway: createPathway,
     updatePathway: updatePathway,
-    queryPathways: queryPathways
+    queryPathways: queryPathways,
+    deletePathway: deletePathway
 };
 
 function getPathways(req, res) {
@@ -130,3 +131,13 @@ function queryPathways(req, res) {
         res.json(docs);
     });
 }
+
+function deletePathway(req, res) {
+    pathway.remove({_id : req.params.pathway_id}, function(err) {
+        if(err) {
+            console.log(err);
+        }
+        
+        res.json({deleted: req.params.pathway_id});
+    });
+};

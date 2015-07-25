@@ -9,7 +9,8 @@ function pathwayService($http) {
         getPathway: getPathway,
         makePathway: makePathway,
         savePathway: savePathway,
-        queryPathways: queryPathways
+        queryPathways: queryPathways,
+        deletePathway: deletePathway
     }
     
     function getAllPathways() {
@@ -30,5 +31,9 @@ function pathwayService($http) {
     
     function queryPathways(query) {
         return $http.post('/api/pathways/find', query);
+    }
+    
+    function deletePathway(pathwayId) {
+        return $http.delete('/api/pathway/' + pathwayId);
     }
 }

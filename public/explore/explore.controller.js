@@ -5,6 +5,7 @@ ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '
 
 function ExploreController(pathwayService, badgeService, $stateParams, $state, userService) {
     var vm = this;
+    vm.isDeleting = false;
     
     vm.unselectText = 'No Filter';
     
@@ -66,23 +67,42 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
     };
     
     vm.delete = function(title, pathwayId) {
+        vm.isDeleting = true;
         if(!confirm('Are you sure you want to delete the badge \'' + title + '\'?')) {
+            vm.isDeleting = false;
+            vm.deleteCanceled = true;
             return;
         }
+        pathwayService.deletePathway(pathwayId).success(function(response) {
+            console.log(response);
+            loadPathways();
+            vm.isDeleting = false;
+        });
     };
     
-    pathwayService.getAllPathways().success(function(response) {
-        vm.pathways = response;
+    vm.goToPathway = function(pathId) {
+        if(!vm.isDeleting && !vm.deleteCanceled) {
+            $state.go('create.detail', { pathway_id: pathId});
+        }
+        vm.deleteCanceled = false;
+    };
+    
+    loadPathways();
+    
+    function loadPathways() {
+        pathwayService.getAllPathways().success(function(response) {
+            vm.pathways = response;
         
-        angular.forEach(vm.pathways, function(pathway) {
-            setBadgeImage(pathway);
+            angular.forEach(vm.pathways, function(pathway) {
+                setBadgeImage(pathway);
+            });
         });
-    });
+    };
     
     function setBadgeImage(pathway) {
         if(angular.isDefined(pathway.badge) && !vm.isDef(pathway.badgeImg)) {
             badgeService.getBadge(pathway.badge).success(function(response) {
-                //console.log('getting badge image from remote: ' + response.data.image_url);
+                console.log('getting badge image from remote: ' + response.data.image_url);
                 pathway.badgeImg = response.data.image_url;
                 pathwayService.savePathway(pathway._id, pathway).success(function(response) {
                     //console.log(response);

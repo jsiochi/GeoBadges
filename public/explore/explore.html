@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </a>
-            <a ng-repeat="pathway in explore.pathways" ng-if="explore.canEdit" ui-sref="create.detail({ pathway_id: pathway._id})">
+            <a href ng-repeat="pathway in explore.pathways" ng-if="explore.canEdit" ng-click="explore.goToPathway(pathway._id)">
                 <div class="col-md-3">
                     <div class="service-block">
                         <span class="glyphicon glyphicon-trash" ng-if="explore.canAdmin" ng-click="explore.delete(pathway.title, pathway._id)"></span>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </a>
-            <h3 ng-if="explore.pathways.length < 1">No results found</h3>
+            <h3 ng-if="explore.pathways.length < 1">No badges found</h3>
         </div>
     </div>
 </section>
