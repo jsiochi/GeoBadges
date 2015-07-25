@@ -15,13 +15,17 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         } else if(response.auth == true) {
             vm.canEdit = true;
         }
+        
+        if(!$state.is('pathway')) {
+            firstTimeModal();
+        }
     });
     
     userService.isLoggedIn('admin').success(function(response) {
         console.log(response.auth);
         vm.canAdmin = response.auth;
     });
-
+    
     vm.guidePart = 'define'; //can be 'define', 'badge', or 'waypoint'
     
     vm.pathway = {};
@@ -89,9 +93,10 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         if(!vm.isDef(vm.waypoints)) {
             vm.waypoints = [];
         }
-        var number = vm.waypoints.length
+        var number = vm.waypoints.length;
         vm.waypoints.push({text: 'Untitled Step', content: '', index: number});
         vm.currentWaypoint = number;
+        vm.pathway.waypoints = vm.waypoints;
         vm.savePathway();
     };
     
@@ -287,4 +292,18 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
             }
         }
     };
+    
+    function firstTimeModal() {
+        $modal.open({
+            animation: true,
+            controller: 'BadgeController',
+            template: '<div class="row" style="margin-top: 40px"><div class="col-md-8 col-md-offset-2 text-center">' +
+                'Welcome to the GeoBadges Creator. Creating a GeoBadge works in three steps. ' + 
+                'First, you\'ll give all the background description for your badge. Second, you\'ll create a Lesson ' + 
+                'for how learners can earn your badge. Finally, you\'ll submit for review. If its accepted, the ' + 
+                'Review Team will assign an icon to it, and add it to the commons for anyone to start working on!<br>' +
+                '<button type="button" class="btn btn-default" style="margin-bottom: 40px;" ng-click="close()">Close</button></div></div>',
+            size: 'md'
+        });
+    }
 }

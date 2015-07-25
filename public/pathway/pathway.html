@@ -82,9 +82,9 @@
                 <div class="col-md-3">
                     <img class="img-responsive" ng-src="{{creator.badgeImage}}" alt="A badge image will be created upon submission review" style="height: 200px"/>
                     <div class="badge-meta">
-                        <h3><small>grade</small><br/>{{creator.pathway.targetAges}} </h3>
-                        <h3><small>subject area</small><br/>{{creator.pathway.subjectAreas}}</h3>
-                        <h3><small>learning environment</small><br/>{{creator.pathway.environments}}</h3>
+                        <h3><small>grade</small><br/><div ng-repeat="age in creator.pathway.targetAges">{{age}} </div></h3>
+                        <h3><small>subject area</small><br/><div ng-repeat="subject in creator.pathway.subjectAreas">{{subject}} </div></h3>
+                        <h3><small>learning environment</small><br/><div ng-repeat="env in creator.pathway.environments">{{env}} </div></h3>
                     </div>
                     <br>
                     <button class="btn btn-default btn-block" ng-click="creator.changePart('waypoint', 0)">
@@ -99,7 +99,7 @@
                 <h3 class="content-title"><span>Creator</span></h3>
                 <p class="section-subtitle content-subtitle">Created by <a href="mailto:{{creator.pathway.creatorEmail}}">{{creator.pathway.creator}}</a> on {{creator.pathway.dateCreated | date: 'longDate'}}</p>
                     
-                <h3 class="content-title"><span>Course Description</span></h3>
+                <h3 class="content-title"><span>Description</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.longDescription}}</p>
                 
                 <h3 class="content-title"><span>Purpose</span></h3>
@@ -117,16 +117,19 @@
                 <h3 class="content-title"><span>Author's Notes</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.authorNotes}}</p>
                  
-                <h3 class="content-title"><span>Materials and Requirements</span></h3>
+                <h3 class="content-title"><span>Materials</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.materials}}</p>
+                    
+                <h3 class="content-title"><span>Minimum Requirements</span></h3>
+                <p class="section-subtitle content-subtitle">{{creator.pathway.minimumRequirements}}</p>
                     
                 <h3 class="content-title"><span>Time to Earn</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.pathway.timeToEarn}}</p>
                 
-                <h3 class="content-title"><span>Standards</span></h3>
+                <h3 class="content-title"><span>Learning Standards</span></h3>
                 <p class="section-subtitle content-subtitle"><i>{{creator.tagsToList(creator.pathway.standards)}}</i></p>
                     
-                <h3 class="content-title"><span>Tools</span></h3>
+                <h3 class="content-title"><span>Mapping or GIS Platforms</span></h3>
                 <p class="section-subtitle content-subtitle"><i>{{creator.tagsToList(creator.pathway.tools)}}</i></p>
                 
                 <h3 class="content-title"><span>Tags</span></h3>
@@ -192,6 +195,7 @@
                             <div class="col-lg-9">
                                 <div class="form-horizontal">
                                     <div class="form-group">
+                                        GeoBadges uses Credly for earning and issuing badges. If you don't have a Credly account yet, create one <a href="https://credly.com/" target="_blank">here</a>.
                                             <label for="pahtway-title" class="col-sm-4 control-label">Credly Username</label>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control" ng-model="creator.user" id="pathway-title" placeholder="Username"/> 

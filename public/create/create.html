@@ -11,12 +11,14 @@
                                 <div style="width: 100%; display: inline-block">
                                 <div class="btn-group pull-right" dropdown>
                                     <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
-                                        <span click-value ng-model="creator.pathway.targetAges">{{creator.pathway.targetAges}}</span>
+                                        <span click-value-multi ng-model="creator.pathway.targetAges" ng-bind="creator.pathway.targetAges"></span>
                                         <span ng-if="!creator.isDef(creator.pathway.targetAges)">(select)</span>
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li ng-repeat="age in creator.gradeList" click-set param="creator.pathway.targetAges"><a>{{age.desc}}</a></li>
+                                        <li ng-repeat="age in creator.gradeList" click-set param="creator.pathway.targetAges"><a>{{age.desc}}
+                                            <span class="glyphicon glyphicon-ok" ng-show="creator.pathway.targetAges.indexOf(age.desc) >= 0"></span>
+                                            </a></li>
                                     </ul>
                                 </div>
                                 </div>
@@ -25,12 +27,16 @@
                                 <div style="width: 100%; display: inline-block">
                                 <div class="btn-group pull-right" dropdown>
                                     <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
-                                        <span click-value ng-model="creator.pathway.subjectAreas">{{creator.pathway.subjectAreas}}</span>
+                                        <span click-value-multi ng-model="creator.pathway.subjectAreas" ng-bind="creator.pathway.subjectAreas"></span>
                                         <span ng-if="!creator.isDef(creator.pathway.subjectAreas)">(select)</span>
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li ng-repeat="area in creator.subjectList" click-set param="creator.pathway.subjectAreas"><a>{{area}}</a></li>
+                                        <li ng-repeat="area in creator.subjectList" click-set param="creator.pathway.subjectAreas">
+                                            <a>{{area}}
+                                                <span class="glyphicon glyphicon-ok" ng-show="creator.pathway.subjectAreas.indexOf(area) >= 0"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 </div>
@@ -39,12 +45,13 @@
                                 <div style="width: 100%; display: inline-block">
                                 <div class="btn-group pull-right" dropdown>
                                     <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
-                                        <span click-value ng-model="creator.pathway.environments">{{creator.pathway.environments}}</span>
+                                        <span click-value-multi ng-model="creator.pathway.environments" ng-bind="creator.pathway.environments"></span>
                                         <span ng-if="!creator.isDef(creator.pathway.environments)">(select)</span>
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li ng-repeat="env in creator.learningEnvList" click-set param="creator.pathway.environments"><a>{{env}}</a></li>
+                                        <li ng-repeat="env in creator.learningEnvList" click-set param="creator.pathway.environments"><a>{{env}}
+                                            <span class="glyphicon glyphicon-ok" ng-show="creator.pathway.environments.indexOf(env) >= 0"></span></a></li>
                                     </ul>
                                 </div>
                                 </div>
@@ -66,7 +73,7 @@
                 <h3 class="content-title"><span>Creator's Email</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.creatorEmail" placeholder="Give us a way to contact you"/></p>
                     
-                <h3 class="content-title"><span>Course Description</span></h3>
+                <h3 class="content-title"><span>Description</span></h3>
                 <p class="section-subtitle content-subtitle"><textarea rows="4" class="form-control" ng-model="creator.pathway.longDescription" placeholder="How can the badge be explained in a simple, clear way?"> 
                 </textarea></p>
                 
@@ -77,7 +84,7 @@
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.criteria" placeholder="What does someone need to do in order to earn this badge?"/></p>
                     
                 <h3 class="content-title"><span>Evidence Description</span></h3>
-                <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.evidenceDescription" placeholder="What evidence is required to earn this badge?"/></p>
+                <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.evidenceDescription" placeholder="What evidence is required to earn this badge? For example, it might be a link to an edit in OpenStreetMap, a photo of a hand drawn map, a video showing completed work, etc."/></p>
                     
                 <h3 class="content-title"><span>Assessment</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.assessment" placeholder="How will the work be assessed?"/></p>
@@ -94,18 +101,20 @@
                 <h3 class="content-title"><span>Time to Earn</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.timeToEarn" placeholder="How long do you think it will take to earn this badge, on average?"/></p>
                 
-                <h3 class="content-title"><span>Standards</span></h3>
-                <p class="section-subtitle content-subtitle"><tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Standard"></tags-input></p>
+                <h3 class="content-title"><span>Learning Standards</span></h3>
+                <p class="section-subtitle content-subtitle"><small>If you're familiar with specific learning standards that your Badge addresses, include them here. If you aren't, don't worry! Educators will be able to add Standards to your Badge once its published.</small>
+                    <tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Standard"></tags-input></p>
                     
-                <h3 class="content-title"><span>Tools</span></h3>
+                <h3 class="content-title"><span>Mapping or GIS Platforms</span></h3>
                 <p class="section-subtitle content-subtitle"><tags-input class="bootstrap" ng-model="creator.pathway.tools" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Tool"></tags-input></p>
                 
                 <h3 class="content-title"><span>Tags</span></h3>
                 <p class="section-subtitle content-subtitle"><tags-input class="bootstrap" ng-model="creator.pathway.tags" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Tag"></tags-input></p>
                     
                 <h3 class="content-title"><span>Supporting Reasearch</span></h3>
-                <p class="section-subtitle content-subtitle"><textarea rows="4" class="form-control" ng-model="creator.pathway.research" placeholder="Add research that supports the information presented in the badge lesson"></textarea></p>
+                <p class="section-subtitle content-subtitle"><textarea rows="4" class="form-control" ng-model="creator.pathway.research" placeholder="Add citations of research that support the learning activities and outcomes that your Badge touches upon"></textarea></p>
 
+                <button type="button" class="btn btn-default" ng-click="creator.savePathway()">Save</button>
                 </div>
             </div>
         </div>
