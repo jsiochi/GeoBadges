@@ -120,10 +120,16 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         var formData = new FormData();
         formData.append('file', vm.myFile);
         formData.append('title', vm.pathway.title);
-        formData.append('short_description', vm.pathway.description.substring(0,499));
-        formData.append('description', vm.pathway.longDescription.substring(0,499));
+        if(angular.isDefined(vm.pathway.longDescription)) {
+            formData.append('description', vm.pathway.longDescription.substring(0,499));
+        }
         formData.append('categories', vm.tagsToList(vm.pathway.tags));
-        formData.append('require_claim_evidence_description', vm.pathway.evidenceDescription.substring(0,499));
+        if(angular.isDefined(vm.pathway.evidenceDescription)) {
+            formData.append('require_claim_evidence_description', vm.pathway.evidenceDescription.substring(0,499));
+        } else {
+            alert('Please enter the evidence description!');
+            return;
+        }
         
         var reader = new FileReader();
         
