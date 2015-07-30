@@ -163,7 +163,7 @@ function badgeRequest(uri, method, req, res) {
                         categories: field.tags,
                         is_claimable: 1,
                         require_claim_code: 1,
-                        require_claim_evidence: 1,
+                        require_claim_evidence: 0,
                         require_claim_evidence_description: field.require_claim_evidence_description,
                         expires_in: 10000000 //NEED TO FIGURE OUT A MAX NUMBER
                     },

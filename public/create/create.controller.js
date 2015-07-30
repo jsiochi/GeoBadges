@@ -159,6 +159,7 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
                 console.log('got response: ');
                 console.log(response);
                 vm.pathway.badge = JSON.parse(response).data;
+                vm.pathway.visible = true;
                 console.log(vm.pathway.badge);
                 vm.savePathway();
             });
