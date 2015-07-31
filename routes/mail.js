@@ -1,7 +1,8 @@
 var nodemailer = require('nodemailer');
 
 module.exports = {
-    mailInfoTo: mailInfoTo
+    mailInfoTo: mailInfoTo,
+    mailMessage: mailMessage
 };
 
 var transporter = nodemailer.createTransport({
@@ -19,6 +20,24 @@ function mailInfoTo(req, res) {
         subject: 'Request for GeoBadges Info',
         text: req.body.name + ' would like to know more about GeoBadges. Please add ' + req.body.address + ' to the email list.',
         html: req.body.name + ' would like to know more about <b>GeoBadges</b>. Please add ' + req.body.address + ' to the email list.'
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info) {
+        if(error) {
+            res.json(error);
+        } else {
+            res.json(info);
+        }
+    });
+}
+
+function mailMessage(req, res) {
+    var mailOptions = {
+        from: 'GeoBadges Notifications <geobadges.mailer@gmail.com>',
+        to: req.body.address,
+        subject: req.body.subject,
+        text: req.body.text,
+        html: req.body.text
     };
     
     transporter.sendMail(mailOptions, function(error, info) {

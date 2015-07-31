@@ -109,6 +109,7 @@ router.get('/api/credlybadgebuilder', credlyRoutes.getBadgeBuilderURL);
 router.post('/api/credlybadge/claim', credlyRoutes.claimBadge);
 
 router.post('/app/mailto', mailRoutes.mailInfoTo);
+router.post('/app/mailmsg', mailRoutes.mailMessage);
 
 router.post('/loginUser', 
     passport.authenticate('local'),

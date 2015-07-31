@@ -1,9 +1,9 @@
 angular.module('app.create')
     .controller('CreateController', CreateController);
 
-CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce', 'userService'];
+CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce', 'userService', 'mailService'];
 
-function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce, userService) {
+function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce, userService, mailService) {
     var vm = this;
     vm.canEdit = false;
     vm.canAdmin = false;
@@ -219,7 +219,15 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         
         badgeService.claimBadge(myForm).success(function(response) {
             console.log(response);
+            mailService.mailAnyMessage(vm.pathway.creatorEmail, 'Someone has requested to earn your badge', 
+                                       'Hi ' + vm.pathway.creator + ', <br> The credly user ' + vm.user 
+                                       + ' has requested to earn your badge. Please go to the GeoBadges credly repository,' + 
+                                       ' and click on "Requests" under the "Created" tab to review their evidence and evaluate their request.')
+                .success(function(response) {
+                    console.log(response);
+                });
         });
+
     }
  
     vm.tagsToList = function(tags) {
