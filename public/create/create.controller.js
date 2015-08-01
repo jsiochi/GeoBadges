@@ -8,6 +8,8 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     vm.canEdit = false;
     vm.canAdmin = false;
     
+    var reviewTeam = 'jeremiahsiochi@gmail.com';
+    
     userService.isLoggedIn().success(function(response) {
         if(response.auth == false && !$state.is('pathway')) {
             $state.go('explore');
@@ -203,6 +205,12 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     vm.submitForReview = function () {
         vm.pathway.reviewable = true;
+        mailService.mailAnyMessage(reviewTeam, 'A new badge has been submitted for review', 
+                                       vm.pathway.creator + ' has created the new badge <a href="www.geobadges.org/#/create/' + $stateParams.pathway_id 
+                                       + '">' + vm.pathway.title + '</a>. (Please login as admin before continuing to the link.) You can contact the creator with any comments at ' + vm.pathway.creatorEmail + '.')
+                .success(function(response) {
+                    console.log(response);
+                });
         vm.savePathway();
     };
     
