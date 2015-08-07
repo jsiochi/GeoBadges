@@ -89,10 +89,15 @@ function claimBadge(req, res) {
         }, function(error, response, body) {
             console.log(response);
             console.log(body);
-            
-            completeClaim(body.data.id, body.data.badge_id, body.data.code, req.body.username, req.body.password, function(result) {
-                res.json(result);
-            });
+            if(body.data == undefined || body.data == null) {
+                console.log('BAD!');
+                res.writeHead(401);
+                res.end();
+            } else {
+                completeClaim(body.data.id, body.data.badge_id, body.data.code, req.body.username, req.body.password, function(result) {
+                    res.json(result);
+                });
+            }
         });
     });
 }
@@ -210,7 +215,12 @@ function getAuthToken(callback, username, password) {
             credlyToken = body.data.token;
             console.log('obtained new token: ' + credlyToken);
         }
-        callback(body.data.token);
+        
+        if(body.data == undefined || body.data == null) {
+            callback('');
+        } else {
+            callback(body.data.token); 
+        }
     });
 }
 

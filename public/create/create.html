@@ -101,7 +101,24 @@
                 <h3 class="content-title"><span>Time to Earn</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.timeToEarn" placeholder="How long do you think it will take to earn this badge, on average?"/></p>
                 
-                <h3 class="content-title"><span>Learning Standards</span></h3>
+                <h3 class="content-title"><span>National Geographic Leaning Standards</span></h3>
+                <p class="section-subtitle content-subtitle">
+                    Not familiar with National Geographic standards? Click <a href="http://education.nationalgeographic.com/standards/national-geography-standards/">here</a> to learn more.
+                    <div style="width: 100%; display: inline-block">
+                        <div class="btn-group pull-left" dropdown>
+                            <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                                <span click-value ng-model="creator.pathway.natGeoStandards">{{creator.pathway.natGeoStandards}}</span>
+                                <span ng-if="!creator.isDef(creator.pathway.natGeoStandards)">(select)</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="standard in creator.natGeoStandardList" click-set param="creator.pathway.natGeoStandards"><a>{{standard}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </p> 
+                    
+                <h3 class="content-title"><span>Other Learning Standards</span></h3>
                 <p class="section-subtitle content-subtitle"><small>If you're familiar with specific learning standards that your Badge addresses, include them here. If you aren't, don't worry! Educators will be able to add Standards to your Badge once its published.</small>
                     <tags-input class="bootstrap" ng-model="creator.pathway.standards" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Standard"></tags-input></p>
                     

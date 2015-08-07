@@ -6,6 +6,16 @@
             <div class="section-subtitle">
                 <div class="btn-toolbar">
                     <div class="btn-group pull-right" dropdown>
+                            <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                                <span click-value ng-model="explore.natGeoStandards">National Geographic Standard</span>
+                                
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="standard in explore.natGeoStandardList" click-set param="explore.natGeoStandards"><a ng-click="explore.buildQuery()">{{standard}}</a></li>
+                            </ul>
+                    </div>
+                    <div class="btn-group pull-right" dropdown>
                         <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
                             <span click-value ng-show="explore.targetAges !== explore.unselectText" ng-model="explore.targetAges">{{explore.targetAges}}</span>
                             <span ng-if="!explore.isDef(explore.targetAges) || explore.targetAges === explore.unselectText">Age</span> <span class="caret"></span>
@@ -36,15 +46,16 @@
                     </div>
                     <div class="btn-group pull-right" dropdown>
                         <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false">
-                            Platforms <span class="caret"></span>
+                            <span click-value ng-show="explore.tools !== explore.unselectText" ng-model="explore.tools">{{explore.tools}}</span>
+                            <span ng-if="!explore.isDef(explore.tools) || explore.tools === explore.unselectText">Platform</span>
+                            <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">OpenStreetMap</a></li>
-                            <li><a href="#">MapStory</a></li>
+                            <li ng-repeat="tool in explore.toolList" click-set param="explore.tools"><a ng-click="explore.buildQuery()">{{tool}}</a></li>
                         </ul>
                     </div>
                     <div class="input-group input-group-lg pull-left">
-                       <input type="text" class="form-control" placeholder="Search by tags..." aria-describedby="sizing-addon1">
+                       <input type="text" ng-model="explore.searchTag" class="form-control" placeholder="Search by tags..." aria-describedby="sizing-addon1"><button class="btn btn-sm pull-right" style="position: relative; top: -40px;" ng-click="explore.buildQuery()"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
                 </div>
             </div>
@@ -69,7 +80,8 @@
                     </div>
                 </div>
             </a>
-            <h3 ng-if="explore.pathways.length < 1">No badges found</h3>
+            <h3 ng-if="explore.pathways.length < 1 && !explore.loading">No badges found</h3>
+            <h3 ng-if="explore.loading">Loading...</h3>
         </div>
     </div>
 </section>

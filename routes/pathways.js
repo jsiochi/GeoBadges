@@ -58,7 +58,8 @@ function createPathway(req, res) {
         assessment: req.body.assessment,
         minimumRequirements: req.body.minimumRequirements,
         timeToEarn: req.body.timeToEarn,
-        research: req.body.research/*,
+        research: req.body.research,
+        natGeoStandards: req.body.natGeoStandards/*,
         platformPathway: req.body.platform,
         coursePathway: req.body.coursePathway,
         certPathway: req.body.certPathway*/
@@ -91,6 +92,7 @@ function updatePathway(req, res) {
         path.subjectAreas = req.body.subjectAreas;
         path.environments = req.body.environments;
         path.standards = req.body.standards;
+        path.natGeoStandards = req.body.natGeoStandards;
         path.tags = req.body.tags;
         path.badge = req.body.badge;
         path.badgeImg = req.body.badgeImg;

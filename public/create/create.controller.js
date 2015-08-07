@@ -7,6 +7,9 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     var vm = this;
     vm.canEdit = false;
     vm.canAdmin = false;
+    vm.claimed = false;
+    vm.claimFailed = false;
+    vm.submitting = false;
     
     var reviewTeam = 'jeremiahsiochi@gmail.com';
     
@@ -182,6 +185,27 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     vm.standardList = ['1', '2', '3', '4', '5'];
     
+    vm.natGeoStandardList = [
+        'How to use maps and other geographic representations, geospatial technologies, and spatial thinking to understand and communicate information',
+        'How to use mental maps to organize information about people, places, and environments in a spatial context',
+        'How to analyze the spatial organization of people, places, and environments on Earth\'s surface',
+        'The physical and human characteristics of places',
+        'That people create regions to interpret Earth\'s complexity',
+        'How culture and experience influence people\'s perceptions of places and regions',
+        'The physical processes that shape the patterns of Earth\'s surface',
+        'The characteristics and spatial distribution of ecosystems and biomes on Earth\'s surface',
+        'The characteristics, distribution, and migration of human populations on Earth\'s surface',
+        'The characteristics, distribution, and complexity of Earth\'s cultural mosaics',
+        'The patterns and networks of economic interdependence on Earth\'s surface',
+        'The processes, patterns, and functions of human settlement',
+        'How the forces of cooperation and conflict among people influence the division and control of Earth\'s surface',
+        'How human actions modify the physical environment',
+        'How physical systems affect human systems',
+        'The changes that occur in the meaning, use, distribution, and importance of resources',
+        'How to apply geography to interpret the past',
+        'How to apply geography to interpret the present and plan for the future'
+    ];
+    
     vm.savePathway = function () {
         if(vm.currentWaypoint === 0 && $state.is('create')) {
             pathwayService.makePathway(vm.pathway).success(function(response) {
@@ -222,18 +246,40 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         }
     };
     
+    vm.canClaim = function() {
+        return vm.isDef(vm.evidence) && vm.isDef(vm.user) && vm.isDef(vm.pass)
+    };
+    
     vm.claim = function() {
+        vm.submitting = true;
         var myForm = {badge_id: vm.pathway.badge, evidence: vm.evidence, username: vm.user, password: vm.pass};
         
+        if(!vm.isDef(vm.evidence) || !vm.isDef(vm.user) || !vm.isDef(vm.pass)) {
+            alert('Please enter all three fields before proceeding!');
+            return;
+        }
+        
+        vm.claimed = false;
+        vm.claimFailed = false;
+        
         badgeService.claimBadge(myForm).success(function(response) {
-            console.log(response);
-            mailService.mailAnyMessage(vm.pathway.creatorEmail, 'Someone has requested to earn your badge', 
-                                       'Hi ' + vm.pathway.creator + ', <br> The credly user ' + vm.user 
-                                       + ' has requested to earn your badge. Please go to the GeoBadges credly repository,' + 
-                                       ' and click on "Requests" under the "Created" tab to review their evidence and evaluate their request.')
-                .success(function(response) {
-                    console.log(response);
-                });
+            vm.submitting = false;
+            
+            console.log(response.meta.status_code);
+            vm.claimed = (response.meta.status_code < 300);
+            vm.claimFailed = !vm.claimed;
+            if(vm.claimed) {
+                mailService.mailAnyMessage(vm.pathway.creatorEmail, 'Someone has requested to earn your badge', 
+                                           'Hi ' + vm.pathway.creator + ', <br> The credly user ' + vm.user 
+                                           + ' has requested to earn your badge ' + vm.pathway.title + '. Please go to the GeoBadges credly repository,' + 
+                                           ' and click on "Requests" under the "Created" tab to review their evidence and evaluate their request.')
+                    .success(function(response) {
+                        console.log(response);
+                    });
+            }
+        }).error(function(response) {
+            vm.submitting = false;
+            vm.claimFailed = true;
         });
 
     }
@@ -262,9 +308,9 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         });
         
         badgeModal.result.then(function (badgeUpdate) {
-            console.log(badgeUpdate);
+            
         }, function () {
-            console.log('Modal dismissed');
+
         });
     };
     

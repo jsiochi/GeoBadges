@@ -213,7 +213,11 @@
                                             </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-default" ng-click="creator.claim()">Claim This Badge</button>
+                                <div ng-if="!creator.canClaim()">Please enter your username, password, and evidence link before continuing</div>
+                                <button type="button" class="btn btn-default" ng-disabled="!creator.canClaim()" ng-click="creator.claim()">Claim This Badge</button>
+                                <div ng-if="creator.submitting">Submitting evidence...</div>
+                            <div ng-if="creator.claimed && !creator.claimFailed" class="alert alert-success" style="margin-top: 20px;"><span class="glyphicon glyphicon-ok-circle"></span> Congratulations, your evidence has been successfully submitted for review! If it's accepted you'll receive an email saying you have earned this badge.</div>
+                            <div ng-if="creator.claimFailed" class="alert alert-danger" style="margin-top: 20px;"><span class="glyphicon glyphicon-exclamation-sign"></span>Something went wrong with your request. Make sure you have entered you credentials correctly, or please try submitting again later.</div>
                             </div>
                         </div>
                         <div class="tab-pane active text-style" ng-if="creator.canEdit">
