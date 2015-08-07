@@ -7,7 +7,8 @@ module.exports = {
     createPathway: createPathway,
     updatePathway: updatePathway,
     queryPathways: queryPathways,
-    deletePathway: deletePathway
+    deletePathway: deletePathway,
+    getFeaturedPathways: getFeaturedPathways
 };
 
 function getPathways(req, res) {
@@ -59,7 +60,8 @@ function createPathway(req, res) {
         minimumRequirements: req.body.minimumRequirements,
         timeToEarn: req.body.timeToEarn,
         research: req.body.research,
-        natGeoStandards: req.body.natGeoStandards/*,
+        natGeoStandards: req.body.natGeoStandards,
+        featured: req.body.featured/*,
         platformPathway: req.body.platform,
         coursePathway: req.body.coursePathway,
         certPathway: req.body.certPathway*/
@@ -109,6 +111,7 @@ function updatePathway(req, res) {
         path.research = req.body.research;
         path.visible = req.body.visible;
         path.reviewable = req.body.reviewable;
+        path.featured = req.body.featured;
         /*
         path.platformPathway: req.body.platform;
         path.coursePathway: req.body.coursePathway;
@@ -126,6 +129,16 @@ function updatePathway(req, res) {
 
 function queryPathways(req, res) {
     pathway.find(req.body, function(err, docs) {
+        if(err) {
+            console.log(err);
+        }
+        
+        res.json(docs);
+    });
+}
+
+function getFeaturedPathways(req, res) {
+    pathway.find({featured: true}, function(err, docs) {
         if(err) {
             console.log(err);
         }

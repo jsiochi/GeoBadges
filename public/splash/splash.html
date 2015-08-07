@@ -97,58 +97,22 @@
 <!-- about ends -->
 <!-- services begins -->
 <section id="page-services" class="page-services">
-    <div class="container">
+    <div class="container" ng-controller="SplashController as splash">
         <header class="section-header">
             <h2 class="section-title"><span>Featured GeoBadges</span></h2>
             <div class="spacer"></div>
             <p class="section-subtitle">GeoBadges give teachers ideas and clear guidance on how to integrate fun and meaningful mapping projects into their curriculum. Start earning now!</p>
         </header>
         <div class="row">
-            <div class="col-md-3 ">
-                <a>
+            <a ui-sref="pathway({pathwayId: pathway._id})" ng-repeat="pathway in splash.pathways">
+                <div class="col-md-3">
                     <div class="service-block">
-                        <img class="img-responsive" src="../images/ags.png" style="display: inline"/>
-                        <h3>American Geographical Society</h3>
-                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
+                        <img class="img-responsive" ng-src="{{pathway.badgeImg}}"/>
+                        <h3>{{pathway.title}}</h3>
+                        <p>{{pathway.longDescription}}</p>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a>
-                    <div class="service-block">
-                        <img class="img-responsive" src="../images/badges/osm/osm3.png" />
-                        <h3>OpenStreetMap</h3>
-                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 ">
-                <a>
-                    <div class="service-block">
-                        <img class="img-responsive" src="../images/badges/ms/ms5.png" />
-                        <h3>MapStory</h3>
-                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 ">
-                <a>
-                    <div class="service-block">
-                        <img class="img-responsive" src="../images/badges/ms/ms5.png" />
-                        <h3>Longview Foundation</h3>
-                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 ">
-                <a>
-                    <div class="service-block">
-                        <img class="img-responsive" src="../images/GeoMakers.png" style="display: inline"/>
-                        <h3>GeoMakers</h3>
-                        <p>Lorem ipsum dolor sit amet, ut pri munere perfecto sadipscing, nam habeo legere disputationi ea.</p>
-                    </div>
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
     </div>
 </section>

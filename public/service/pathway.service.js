@@ -7,6 +7,7 @@ function pathwayService($http) {
     return {
         getAllPathways: getAllPathways,
         getPathway: getPathway,
+        getFeaturedPathways: getFeaturedPathways,
         makePathway: makePathway,
         savePathway: savePathway,
         queryPathways: queryPathways,
@@ -19,6 +20,10 @@ function pathwayService($http) {
     
     function getPathway(pathwayId) {
         return $http.get('/api/pathway/' + pathwayId);
+    }
+    
+    function getFeaturedPathways() {
+        return $http.get('/api/pathways/featured');
     }
     
     function makePathway(content) {

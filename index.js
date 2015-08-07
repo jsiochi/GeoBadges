@@ -96,6 +96,7 @@ var router = express.Router();
 //should use middleware for validation and auth. NEED THIS SOON (ish)
 
 router.get('/api/pathways', pathwayRoutes.getPathways);
+router.get('/api/pathways/featured', pathwayRoutes.getFeaturedPathways);
 router.get('/api/pathway/:pathway_id', pathwayRoutes.getPathwayById);
 router.post('/api/pathways', pathwayRoutes.createPathway);
 router.put('/api/pathway/:pathway_id', pathwayRoutes.updatePathway);

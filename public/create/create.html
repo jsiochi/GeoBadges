@@ -57,6 +57,7 @@
                                 </div>
                             </h3>
                     </div>
+                    <div ng-if="creator.canAdmin"><br>Feature this badge on the homepage of Geobadges.org?<input type="checkbox" ng-model="creator.pathway.featured"></div>
                     <br>
                     <button class="btn btn-default btn-block" ng-click="creator.changePart('waypoint', 0)">
                         Continue to Lesson
@@ -101,9 +102,9 @@
                 <h3 class="content-title"><span>Time to Earn</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.timeToEarn" placeholder="How long do you think it will take to earn this badge, on average?"/></p>
                 
-                <h3 class="content-title"><span>National Geographic Leaning Standards</span></h3>
+                <h3 class="content-title"><span>National Geography Learning Standards</span></h3>
                 <p class="section-subtitle content-subtitle">
-                    Not familiar with National Geographic standards? Click <a href="http://education.nationalgeographic.com/standards/national-geography-standards/">here</a> to learn more.
+                    Not familiar with National Geography standards? Click <a href="http://education.nationalgeographic.com/standards/national-geography-standards/">here</a> to learn more.
                     <div style="width: 100%; display: inline-block">
                         <div class="btn-group pull-left" dropdown>
                             <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
