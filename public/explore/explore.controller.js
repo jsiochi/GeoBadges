@@ -1,9 +1,9 @@
 angular.module('app.explore')
     .controller('ExploreController', ExploreController);
 
-ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', 'userService'];
+ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', 'userService', '$scope'];
 
-function ExploreController(pathwayService, badgeService, $stateParams, $state, userService) {
+function ExploreController(pathwayService, badgeService, $stateParams, $state, userService, $scope) {
     var vm = this;
     vm.isDeleting = false;
     vm.loading = true;
@@ -94,8 +94,8 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
         if(vm.isDef(vm.tools) && vm.tools !== vm.unselectText) {
             q['tools.text'] = vm.tools;
         }
-        if(vm.isDef(vm.searchTag)) {
-            q['tags.text'] = {$regex: vm.searchTag, $options: "i"};
+        if(vm.isDef($scope.searchTag)) {
+            q['tags.text'] = {$regex: $scope.searchTag, $options: "i"};
         };
         
         console.log(q);
@@ -126,6 +126,12 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
         }
         vm.deleteCanceled = false;
     };
+    
+    $scope.$watch('searchTag', function(newValue) {
+        if(newValue === '') {
+            vm.buildQuery();
+        }
+    });
     
     loadPathways();
     
