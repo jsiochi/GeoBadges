@@ -319,3 +319,7 @@ input[type="file"] {
 .service-block .glyphicon:hover {
     color: pink;
 }
+
+.service-block .glyphicon + .glyphicon-eye-close {
+    top: 30px;
+}

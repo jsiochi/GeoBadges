@@ -59,6 +59,7 @@
                             </h3>
                     </div>
                     <div ng-if="creator.canAdmin"><br>Feature this badge on the homepage of Geobadges.org?<input type="checkbox" ng-model="creator.pathway.featured"></div>
+                    <div ng-if="creator.canAdmin"><br>Should this badge be visible in Explore? (Do not check this box if this badge has not been reviewed yet.)<input type="checkbox" ng-model="creator.pathway.visible"></div>
                     <br>
                     <button class="btn btn-default btn-block" ng-click="creator.changePart('waypoint', 0)">
                         Continue to Lesson

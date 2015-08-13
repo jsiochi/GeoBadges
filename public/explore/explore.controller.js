@@ -120,6 +120,19 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
         });
     };
     
+    vm.deactivate = function(pathway) {
+        vm.isDeleting = true;
+        if(!confirm('Are you sure you want to deactivate the badge \'' + pathway.title + '\'?')) {
+            vm.isDeleting = false;
+            vm.deleteCanceled = true;
+            return;
+        }
+        pathway.visible = false;
+        pathwayService.savePathway(pathway._id, pathway).success(function(response) {
+            vm.isDeleting = false;
+        });
+    };
+    
     vm.goToPathway = function(pathId) {
         if(!vm.isDeleting && !vm.deleteCanceled) {
             $state.go('create.detail', { pathway_id: pathId});
