@@ -282,7 +282,13 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
             vm.claimFailed = true;
         });
 
-    }
+    };
+    
+    vm.saveUserTags = function() {
+        vm.pathway.tags = vm.pathway.tags.concat(vm.newTags);
+        vm.newTags = [];
+        vm.savePathway();
+    };
  
     vm.tagsToList = function(tags) {
         var tagList = '';

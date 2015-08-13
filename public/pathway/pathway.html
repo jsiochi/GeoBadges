@@ -137,6 +137,8 @@
                 
                 <h3 class="content-title"><span>Tags</span></h3>
                 <p class="section-subtitle content-subtitle">{{creator.tagsToList(creator.pathway.tags)}}</p>
+                
+                <p class="section-subtitle content-subtitle"><i>Add Tags</i><tags-input class="bootstrap" ng-model="creator.newTags" type="text" replace-spaces-with-dashes="false" placeholder="Enter a Tag"></tags-input><button class="btn btn-sm" ng-click="creator.saveUserTags()">Save</button></p>
                     
                 <h3 class="content-title"><span>Supporting Reasearch</span></h3>
                 <p class="section-subtitle content-subtitle"><i>{{creator.pathway.research}}</i></p>
