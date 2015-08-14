@@ -13,6 +13,12 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     var reviewTeam = 'jeremiahsiochi@gmail.com';
     
+    //LOAD DISQUS HERE
+    
+    var s = document.createElement('script');
+    s.src = 'disqus.js';
+    document.body.appendChild(s);
+    
     userService.isLoggedIn().success(function(response) {
         if(response.auth == false && !$state.is('pathway')) {
             $state.go('explore');
@@ -222,7 +228,6 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         
         angular.forEach(vm.ccLicenseList, function(lic) {
             if(lic.title === licName) {
-                console.log(lic.title);
                 licUrl = lic.url;
                 return;
             }
