@@ -23,6 +23,7 @@ var pathwaySchema = new Schema({
     environments: [String],
     standards: [{text: String}],
     natGeoStandards: String,
+    ccLicense: String,
     tags: [{text: String}],
     tools: [{text: String}],
     research: String,

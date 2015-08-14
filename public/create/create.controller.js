@@ -206,6 +206,31 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         'How to apply geography to interpret the present and plan for the future'
     ];
     
+    vm.ccLicenseList = [
+        {title: 'No Creative Commons License', url: ''},
+        {title: 'Attribution', url: 'https://creativecommons.org/licenses/by/4.0/'},
+        {title: 'Attribution Share Alike', url: 'https://creativecommons.org/licenses/by-sa/4.0/'},
+        {title: 'Attribution No Derivatives', url: 'https://creativecommons.org/licenses/by-nd/4.0/'},
+        {title: 'Attribution Non-Commercial', url: 'https://creativecommons.org/licenses/by-nc/4.0/'},
+        {title: 'Attribution Non-Commercial Share Alike', url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'},
+        {title: 'Attribution Non-Commercial No Derivatives', url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/'},
+        {title: 'Public Domain Dedication', url: 'http://creativecommons.org/publicdomain/zero/1.0/'}
+    ];
+    
+    vm.getCCUrl = function(licName) {
+        var licUrl = '';
+        
+        angular.forEach(vm.ccLicenseList, function(lic) {
+            if(lic.title === licName) {
+                console.log(lic.title);
+                licUrl = lic.url;
+                return;
+            }
+        });
+        
+        return licUrl;
+    };
+    
     vm.savePathway = function () {
         if(vm.currentWaypoint === 0 && $state.is('create')) {
             pathwayService.makePathway(vm.pathway).success(function(response) {

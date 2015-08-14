@@ -232,5 +232,6 @@
                 </div>
             </div>  
         </div>
+        <p ng-if="creator.getCCUrl(creator.pathway.ccLicense) != ''">The content on this page is available under the <a href="{{creator.getCCUrl(creator.pathway.ccLicense)}}" target="_blank">Creative Commons {{::creator.pathway.ccLicense}} License</a> </p>
     </section>
 </div>

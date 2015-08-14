@@ -133,6 +133,23 @@
                     
                 <h3 class="content-title"><span>Supporting Reasearch</span></h3>
                 <p class="section-subtitle content-subtitle"><textarea rows="4" class="form-control" ng-model="creator.pathway.research" placeholder="Add citations of research that support the learning activities and outcomes that your Badge touches upon"></textarea></p>
+                
+                <h3 class="content-title"><span>Creative Commons License</span></h3>
+                <p class="section-subtitle content-subtitle">
+                    Apply a Creative Commons License to your GeoBadge. Not familiar with Creative Commons and its licenses? <a href="https://wiki.creativecommons.org/wiki/Frequently_Asked_Questions" target="_blank">Learn more here.</a>
+                    <div style="width: 100%; display: inline-block">
+                        <div class="btn-group pull-left" dropdown>
+                            <button class="btn btn-dropdown btn-lg dropdown-toggle" type="button" dropdown-toggle aria-haspopup="true" aria-expanded="false" style="font-size: 18px;">
+                                <span click-value ng-model="creator.pathway.ccLicense">{{creator.pathway.ccLicense}}</span>
+                                <span ng-if="!creator.isDef(creator.pathway.ccLicense)">(select)</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="license in creator.ccLicenseList" click-set param="creator.pathway.ccLicense"><a>{{license.title}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </p>
 
                 <button type="button" class="btn btn-default" ng-click="creator.savePathway()">Save</button>
                 </div>

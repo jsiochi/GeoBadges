@@ -61,7 +61,9 @@ function createPathway(req, res) {
         timeToEarn: req.body.timeToEarn,
         research: req.body.research,
         natGeoStandards: req.body.natGeoStandards,
-        featured: req.body.featured/*,
+        featured: req.body.featured,
+        ccLicense: req.body.ccLicense
+        /*,
         platformPathway: req.body.platform,
         coursePathway: req.body.coursePathway,
         certPathway: req.body.certPathway*/
@@ -112,6 +114,7 @@ function updatePathway(req, res) {
         path.visible = req.body.visible;
         path.reviewable = req.body.reviewable;
         path.featured = req.body.featured;
+        path.ccLicense = req.body.ccLicense;
         /*
         path.platformPathway: req.body.platform;
         path.coursePathway: req.body.coursePathway;
