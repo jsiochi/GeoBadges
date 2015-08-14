@@ -13,12 +13,6 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     var reviewTeam = 'jeremiahsiochi@gmail.com';
     
-    //LOAD DISQUS HERE
-    
-    var s = document.createElement('script');
-    s.src = 'disqus.js';
-    document.body.appendChild(s);
-    
     userService.isLoggedIn().success(function(response) {
         if(response.auth == false && !$state.is('pathway')) {
             $state.go('explore');
@@ -84,8 +78,15 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     if(angular.isDefined($stateParams.pathway_id) && $stateParams.pathway_id !== null && $stateParams.pathway_id !== "") {
         pathwayService.getPathway($stateParams.pathway_id).success(function(response) {
-            console.log(JSON.stringify(response));
             vm.pathway = response;
+            
+            //LOAD DISQUS NOW
+    
+            var s = document.createElement('script');
+            s.src = 'disqus.js';
+            window.badgeTitle = vm.pathway.title;
+            document.body.appendChild(s);
+            
             if(vm.pathway.visible == false && !vm.canEdit) {
                 $state.go('explore');
                 return;

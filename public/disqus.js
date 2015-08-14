@@ -1,7 +1,9 @@
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'geobadges'; // Required - Replace '<example>' with your forum shortname
 var splitArr = location.href.split('/');
-var disqus_identifier = 'disqus_thread_' + splitArr[splitArr.length-1];
+var disqus_identifier = 'disqus_badge_thread_' + splitArr[splitArr.length-1];
+var disqus_title = window.badgeTitle;
+var disqus_url = 'http://www.geobadges.org/' + window.badgeTitle;
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function() {
