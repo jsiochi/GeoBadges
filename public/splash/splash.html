@@ -33,7 +33,8 @@
                                 
                                 .embed-container iframe,
                                 .embed-container object,
-                                .embed-container embed {
+                                .embed-container embed,
+                                .embed-container video {
                                     position: absolute;
                                     top: 0;
                                     left: 0;
@@ -42,7 +43,10 @@
                                 }
                             </style>
                             <div class='embed-container'>
-                                <iframe src='https://player.vimeo.com/video/122156692' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<!--                                <iframe src='https://player.vimeo.com/video/122156692' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>-->
+                                <video width="320" height="240" controls="controls" poster="../images/video_loading.png">
+                                    <source src="https://dl.dropboxusercontent.com/u/63253018/Geobadges%20HQ.mp4" type="video/mp4" />
+                                </video>
 <!--
                             </div>
                         </li>
