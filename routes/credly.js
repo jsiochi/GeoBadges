@@ -2,7 +2,7 @@
 
 var formidable = require('formidable');
 var request = require('request');
-require('request-debug')(request);
+//require('request-debug')(request);
 var fs = require('fs');
 
 var credlyApi = require('../config/credly').credlyApi;
