@@ -210,7 +210,7 @@
                                                 <input type="password" class="form-control" ng-model="creator.pass" id="pathway-title" placeholder="Password"/>
                                             </div>
                                             <div class="col-sm-8 col-sm-offset-4">
-                                                 {{creator.pathway.evidenceDescription}}
+                                                 {{creator.pathway.evidenceDescription}} <span ng-if="!creator.pathway.requireEvidence">(Note: evidence is not required for this badge)</span>
                                             </div>
                                             <label for="pahtway-title" class="col-sm-4 control-label">Evidence URL</label>
                                             <div class="col-sm-8">
@@ -218,7 +218,10 @@
                                             </div>
                                     </div>
                                 </div>
-                                <div ng-if="!creator.canClaim()">Please enter your username, password, and evidence link before continuing</div>
+                                <div ng-if="!creator.canClaim()">
+                                    <span ng-if="creator.pathway.requireEvidence">Please enter your username, password, and evidence link before continuing</span>
+                                    <span ng-if="!creator.pathway.requireEvidence">Please enter your username and password before continuing</span>
+                                </div>
                                 <button type="button" class="btn btn-default" ng-disabled="!creator.canClaim()" ng-click="creator.claim()">Claim This Badge</button>
                                 <div ng-if="creator.submitting">Submitting evidence...</div>
                             <div ng-if="creator.claimed && !creator.claimFailed" class="alert alert-success" style="margin-top: 20px;"><span class="glyphicon glyphicon-ok-circle"></span> Congratulations, your evidence has been successfully submitted for review! If it's accepted you'll receive an email saying you have earned this badge.</div>

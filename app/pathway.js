@@ -12,6 +12,9 @@ var pathwaySchema = new Schema({
     description: String,
     criteria: String,
     evidenceDescription: String,
+    requireEvidence: {type: Boolean, default: false},
+    requireApproval: {type: Boolean, default: false},
+    moreApprovers: String,
     longDescription: String, //<--DEPRECATED
     assessment: String,
     authorNotes: String, //<--DEPRECATED

@@ -2,6 +2,7 @@
 
 var formidable = require('formidable');
 var request = require('request');
+require('request-debug')(request);
 var fs = require('fs');
 
 var credlyApi = require('../config/credly').credlyApi;
@@ -41,8 +42,8 @@ function getBadge(req, res) {
         },
         json: true
     }, function(error, response, body) {
-        console.log(response);
-        console.log(body);
+        //console.log(response);
+        //console.log(body);
         res.json(body);
     });
 }
@@ -61,8 +62,8 @@ function getBadgeBuilderURL(req, res) {
             },
             json: true
         }, function(error, response, body) {
-            console.log(response);
-            console.log(body);
+            //console.log(response);
+            //console.log(body);
             res.json({badgeBuilderRef: 'https://credly.com/badge-builder/embed/' + body.temp_token});
         });
     });
@@ -70,6 +71,7 @@ function getBadgeBuilderURL(req, res) {
 
 function claimBadge(req, res) {
     getAuthToken(function(token) {
+        console.log(req.body.evidence);
         request({
             uri: credlyApi + 'me/claimable_badges/create',
             method: 'POST',
@@ -77,9 +79,7 @@ function claimBadge(req, res) {
                 access_token: token
             },
             form: {
-                badge_id: req.body.badge_id,
-                evidence_type: 'link',
-                evidence_link: req.body.evidence
+                badge_id: req.body.badge_id
             },
             headers: {
                 'X-Api-Key' : process.env.CREDLY_KEY, 
@@ -87,14 +87,14 @@ function claimBadge(req, res) {
             },
             json: true
         }, function(error, response, body) {
-            console.log(response);
-            console.log(body);
+            //console.log(response);
+            //console.log(body);
             if(body.data == undefined || body.data == null) {
                 console.log('BAD!');
                 res.writeHead(401);
                 res.end();
             } else {
-                completeClaim(body.data.id, body.data.badge_id, body.data.code, req.body.username, req.body.password, function(result) {
+                completeClaim(body.data.id, body.data.badge_id, body.data.code, req.body.username, req.body.password, req.body.evidence, function(result) {
                     res.json(result);
                 });
             }
@@ -103,7 +103,7 @@ function claimBadge(req, res) {
 }
 
 /* Helper function for credit claiming */
-function completeClaim(id, badgeId, code, user, pass, callback) {
+function completeClaim(id, badgeId, code, user, pass, evidence, callback) {
     var onAuth = function(token) {
         request({
             uri: credlyApi + 'me/claimable_badges/claim/' + badgeId,
@@ -113,7 +113,8 @@ function completeClaim(id, badgeId, code, user, pass, callback) {
             },
             form: {
                 id: id,
-                code: code
+                code: code,
+                evidences: [{file: evidence}]
             },
             headers: {
                 'X-Api-Key' : process.env.CREDLY_KEY, 
@@ -168,13 +169,14 @@ function badgeRequest(uri, method, req, res) {
                         categories: field.tags,
                         is_claimable: 1,
                         require_claim_code: 1,
-                        require_claim_evidence: 0,
+                        require_claim_evidence: field.require_evidence,
+                        approve_claim_automatically: field.require_approval,
                         require_claim_evidence_description: field.require_claim_evidence_description,
                         expires_in: 10000000 //NEED TO FIGURE OUT A MAX NUMBER
                     },
                     method: method
                 }, function(error, response, body) {
-                    console.log(body);
+                    //console.log(body);
                     res.json(body);
                 });
             }); 
@@ -210,7 +212,7 @@ function getAuthToken(callback, username, password) {
         },
         json: true
     }, function(error, response, body) {
-        console.log(body);
+        //console.log(body);
         if(!learner) {
             credlyToken = body.data.token;
             console.log('obtained new token: ' + credlyToken);

@@ -52,6 +52,9 @@ function createPathway(req, res) {
         badge: req.body.badge,
         badgeImg: req.body.badgeImg,
         evidenceDescription: req.body.evidenceDescription,
+        requireEvidence: req.body.requireEvidence,
+        requireApproval: req.body.requireApproval,
+        moreApprovers: req.body.moreApprovers,
         creator: req.body.creator,
         creatorEmail: req.body.creatorEmail,
         purpose: req.body.purpose,
@@ -101,6 +104,9 @@ function updatePathway(req, res) {
         path.badge = req.body.badge;
         path.badgeImg = req.body.badgeImg;
         path.evidenceDescription = req.body.evidenceDescription;
+        path.requireEvidence = req.body.requireEvidence;
+        path.requireApproval = req.body.requireApproval;
+        path.moreApprovers = req.body.moreApprovers;
         
         path.tools = req.body.tools;
         path.creator = req.body.creator;

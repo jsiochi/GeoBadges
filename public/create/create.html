@@ -89,6 +89,15 @@
                 <h3 class="content-title"><span>Evidence Description</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.evidenceDescription" placeholder="What evidence is required to earn this badge? For example, it might be a link to an edit in OpenStreetMap, a photo of a hand drawn map, a video showing completed work, etc."/></p>
                     
+                <h3 class="content-title"><span>Require Evidence?</span></h3>
+                <p class="section-subtitle content-subtitle"><small>Will those who want to earn your badge need to submit evidence? If so, check the box below.</small><br>Yes, require evidence <input type="checkbox" ng-model="creator.pathway.requireEvidence"></p>
+                    
+                <h3 class="content-title"><span>Require Approval?</span></h3>
+                <p class="section-subtitle content-subtitle"><small>Should all requests to earn your badge be first approved? If so, check the box below. Otherwise all badge earning requests will be approved automatically.</small><br>Yes, require approval <input type="checkbox" ng-model="creator.pathway.requireApproval"></p>
+                    
+                <h3 class="content-title"><span>Additional Approvers</span></h3>
+                <p class="section-subtitle content-subtitle"><small>Want to give others the ability to review badge earning requests? These reviewers will be notified every time someone requests to earn your badge, and will be able to approve or decline that request.</small><input type="text" class="form-control" ng-model="creator.pathway.moreApprovers" placeholder="Enter a comma-separated list of reviewer's email addresses, e.g. joe@example.com, jane@fake.net, john@notreal.org"/></p>
+                    
                 <h3 class="content-title"><span>Assessment</span></h3>
                 <p class="section-subtitle content-subtitle"><input type="text" class="form-control" ng-model="creator.pathway.assessment" placeholder="How will the work be assessed?"/></p>
                  

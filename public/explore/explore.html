@@ -61,7 +61,7 @@
             </div>
         </header>
         <div class="row">
-            <a ng-repeat="pathway in explore.pathways"  ng-if="!explore.canEdit && pathway.visible" ui-sref="pathway({ pathway_id: pathway._id})">
+            <a ng-repeat="pathway in explore.pathways"  ng-if="!explore.canEdit && pathway.visible && pathway.reviewable" ui-sref="pathway({ pathway_id: pathway._id})">
                 <div class="col-md-3">
                     <div class="service-block">
                         <img class="img-responsive" ng-src="{{pathway.badgeImg}}"/>

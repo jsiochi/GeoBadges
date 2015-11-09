@@ -1,9 +1,9 @@
 angular.module('app.create')
     .controller('CreateController', CreateController);
 
-CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce', 'userService', 'mailService'];
+CreateController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', '$modal', '$sce', 'userService', 'mailService', '$scope'];
 
-function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce, userService, mailService) {
+function CreateController(pathwayService, badgeService, $stateParams, $state, $modal, $sce, userService, mailService, $scope) {
     var vm = this;
     vm.canEdit = false;
     vm.canAdmin = false;
@@ -11,7 +11,7 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     vm.claimFailed = false;
     vm.submitting = false;
     
-    var reviewTeam = 'jeremiahsiochi@gmail.com';
+    var reviewTeam = 'jeremiahsiochi@gmail.com, marino@mapstory.org';
     
     userService.isLoggedIn().success(function(response) {
         if(response.auth == false && !$state.is('pathway')) {
@@ -130,8 +130,21 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     
     vm.createBadge = function () {
         var formData = new FormData();
+        var reqEv = 0;
+        var autoApp = 1;
+        
+        if(vm.pathway.requireEvidence) {
+            reqEv = 1;
+        }
+        
+        if(vm.pathway.requireApproval) {
+            autoApp = 0;
+        }
+        
         formData.append('file', vm.myFile);
         formData.append('title', vm.pathway.title);
+        formData.append('require_evidence', reqEv);
+        formData.append('require_approval', autoApp);
         if(angular.isDefined(vm.pathway.longDescription)) {
             formData.append('description', vm.pathway.longDescription.substring(0,499));
         }
@@ -162,6 +175,9 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
                 console.log(vm.pathway.badge);
                 vm.pathway.badgeImg = '';
                 vm.pathway.visible = true;
+                if(vm.canAdmin) {
+                    vm.pathway.reviewable = true;
+                }
                 vm.savePathway();
             });
         } else {
@@ -172,6 +188,13 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
                 console.log(response);
                 vm.pathway.badge = JSON.parse(response).data;
                 vm.pathway.visible = true;
+                if(vm.canAdmin) {
+                    vm.pathway.reviewable = true;
+                }
+                mailService.mailAnyMessage(vm.pathway.creatorEmail, 'Your badge ' + vm.pathway.title + ' has been accepted!', 'Hello ' + vm.pathway.creator + ', <br> your badge ' + vm.pathway.title + ' has been accepted by the GeoBadges review team! It is now ready for users of GeoBadges to earn. Thank you for your contribution to the growing content available on GeoBadges.org!')
+                .success(function(response) {
+                    console.log(response);
+                });
                 console.log(vm.pathway.badge);
                 vm.savePathway();
             });
@@ -278,15 +301,15 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
     };
     
     vm.canClaim = function() {
-        return vm.isDef(vm.evidence) && vm.isDef(vm.user) && vm.isDef(vm.pass)
+        return (vm.isDef(vm.evidence) || (!vm.pathway.requireEvidence)) && vm.isDef(vm.user) && vm.isDef(vm.pass);
     };
     
     vm.claim = function() {
         vm.submitting = true;
         var myForm = {badge_id: vm.pathway.badge, evidence: vm.evidence, username: vm.user, password: vm.pass};
         
-        if(!vm.isDef(vm.evidence) || !vm.isDef(vm.user) || !vm.isDef(vm.pass)) {
-            alert('Please enter all three fields before proceeding!');
+        if((!vm.isDef(vm.evidence) && vm.pathway.requireEvidence) || !vm.isDef(vm.user) || !vm.isDef(vm.pass)) {
+            alert('Please enter all the fields before proceeding!');
             return;
         }
         
@@ -300,9 +323,13 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
             vm.claimed = (response.meta.status_code < 300);
             vm.claimFailed = !vm.claimed;
             if(vm.claimed) {
-                mailService.mailAnyMessage(vm.pathway.creatorEmail, 'Someone has requested to earn your badge', 
-                                           'Hi ' + vm.pathway.creator + ', <br> The credly user ' + vm.user 
-                                           + ' has requested to earn your badge ' + vm.pathway.title + '. Please go to the GeoBadges credly repository,' + 
+                var approvers = vm.pathway.moreApprovers ? vm.pathway.creatorEmail + ',' + vm.pathway.moreApprovers : vm.pathway.creatorEmail;
+                
+                
+                mailService.mailAnyMessage(approvers, 'Someone has requested to earn ' + vm.pathway.creator + '\'s badge', 
+                                           'Hello badge approver, <br> The credly user ' + vm.user 
+                                           + ' has requested to earn the badge ' + vm.pathway.title + ' created by ' + vm.pathway.creator 
+                                           + '. Please go to the GeoBadges credly repository,' + 
                                            ' and click on "Requests" under the "Created" tab to review their evidence and evaluate their request.')
                     .success(function(response) {
                         console.log(response);

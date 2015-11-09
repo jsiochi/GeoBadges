@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'geobadges.mailer@gmail.com',
-        pass: process.env.CREDLY_PASSWORD
+        pass: process.env.EMAIL_PASSWORD
     }
 });
 
