@@ -80,7 +80,7 @@
         <div class="container" style="padding-bottom:10px" ng-if="creator.guidePart === 'define'">
             <div class="row">
                 <div class="col-md-3">
-                    <img class="img-responsive" ng-src="{{creator.badgeImage}}" alt="A badge image will be created upon submission review" style="height: 200px"/>
+                    <img class="img-responsive" ng-src="{{creator.badgeImage}}" alt="A badge image will be created upon submission review" style="height: 200px"/><div class="text-left"><a href="{{creator.badgeImage}}" download="{{vm.pathway.title + ' badge.png'}}"><span class="glyphicon glyphicon-cloud-download"></span> Download Badge Image</a></div>
                     <div class="badge-meta">
                         <h3><small>grade</small><br/><div ng-repeat="age in creator.pathway.targetAges">{{age}} </div></h3>
                         <h3><small>subject area</small><br/><div ng-repeat="subject in creator.pathway.subjectAreas">{{subject}} </div></h3>

@@ -152,8 +152,12 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
         if(angular.isDefined(vm.pathway.evidenceDescription)) {
             formData.append('require_claim_evidence_description', vm.pathway.evidenceDescription.substring(0,499));
         } else {
-            alert('Please enter the evidence description!');
-            return;
+            if(vm.pathway.requireEvidence) {
+                alert('Please enter the evidence description!');
+                return;
+            } else {
+                formData.append('require_claim_evidence_description', '');
+            }
         }
         
         var reader = new FileReader();
