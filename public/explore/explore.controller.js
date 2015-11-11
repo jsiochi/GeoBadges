@@ -37,7 +37,7 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
     
     vm.learningEnvList = [vm.unselectText, 'Inside', 'Outside', 'Individual', 'Small Group', 'Whole Class'];
     
-    vm.toolList = [vm.unselectText, 'MapStory', 'OpenStreetMap'];
+    vm.toolList = [vm.unselectText, 'GeoMakers', 'GeoPlunge', 'CrisisMappers', 'MapStory', 'TeachOSM', 'Open Geospatial Consortium'];
     
     vm.natGeoStandardList = [
         vm.unselectText,
