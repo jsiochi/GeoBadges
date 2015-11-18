@@ -207,11 +207,10 @@ function CreateController(pathwayService, badgeService, $stateParams, $state, $m
 
     vm.currentWaypoint = 0;
     
-    vm.gradeList = [{index: 0, desc: 'Grade 3-5'},
-                    {index: 1, desc: 'Grade 6-8'},
-                    {index: 2, desc: 'Grade 9-12'},
-                    {index: 3, desc: 'Higher Ed'},
-                    {index: 4, desc: 'Pro'}];
+    vm.gradeList = [{index: 0, desc: 'Grade 6-8'},
+                    {index: 1, desc: 'Grade 9-12'},
+                    {index: 2, desc: 'Higher Ed'},
+                    {index: 3, desc: 'Pro'}];
     
     vm.subjectList = ['History', 'Social Studies', 'Earth Science', 'English/Language Arts', 'Economics'];
     

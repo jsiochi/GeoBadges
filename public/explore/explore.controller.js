@@ -27,17 +27,16 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
     });
     
     vm.gradeList = [{index: 0, desc: vm.unselectText},
-                    {index: 1, desc: 'Grade 3-5'},
-                    {index: 2, desc: 'Grade 6-8'},
-                    {index: 3, desc: 'Grade 9-12'},
-                    {index: 4, desc: 'Higher Ed'},
-                    {index: 5, desc: 'Pro'}];
+                    {index: 1, desc: 'Grade 6-8'},
+                    {index: 2, desc: 'Grade 9-12'},
+                    {index: 3, desc: 'Higher Ed'},
+                    {index: 4, desc: 'Pro'}];
     
     vm.subjectList = [vm.unselectText, 'History', 'Social Studies', 'Earth Science', 'English/Language Arts', 'Economics'];
     
     vm.learningEnvList = [vm.unselectText, 'Inside', 'Outside', 'Individual', 'Small Group', 'Whole Class'];
     
-    vm.toolList = [vm.unselectText, 'GeoMakers', 'GeoPlunge', 'CrisisMappers', 'MapStory', 'TeachOSM', 'Open Geospatial Consortium'];
+    vm.toolList = [vm.unselectText, 'American Geographical Society', 'GeoMakers', 'GeoPlunge', 'CrisisMappers', 'MapStory', 'TeachOSM', 'Open Geospatial Consortium'];
     
     vm.natGeoStandardList = [
         vm.unselectText,
