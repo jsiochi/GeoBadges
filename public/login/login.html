@@ -11,6 +11,14 @@
         <a ui-sref="create"><button type="button" class="btn btn-default">Create New Badge</button></a>
         <button type="button" class="btn btn-default" ng-click="login.logout()">Logout</button>
     </div>
+    <div ng-if="login.canAdmin" style="margin-top: 25px; margin-bottom: 25px;">
+        <i>Manage Issuer Orgs</i>:
+        <div ng-repeat="issuer in login.issuerList">
+            {{issuer.name}}
+        </div>
+        <input type="text" ng-model="newIssuer">
+        <button type="button" class="btn btn-default btn-sm" ng-disabled="!newIssuer" ng-click="login.addIssuer(newIssuer)">Add Issuer</button>
+    </div>
 </div>
 
 <ng-include src="'../header/footer.html'"></ng-include>

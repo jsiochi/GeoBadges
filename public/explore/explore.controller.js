@@ -1,9 +1,9 @@
 angular.module('app.explore')
     .controller('ExploreController', ExploreController);
 
-ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', 'userService', '$scope'];
+ExploreController.$inject = ['pathwayService', 'badgeService', '$stateParams', '$state', 'userService', 'issuerService', '$scope'];
 
-function ExploreController(pathwayService, badgeService, $stateParams, $state, userService, $scope) {
+function ExploreController(pathwayService, badgeService, $stateParams, $state, userService, issuerService, $scope) {
     var vm = this;
     vm.isDeleting = false;
     vm.loading = true;
@@ -36,7 +36,16 @@ function ExploreController(pathwayService, badgeService, $stateParams, $state, u
     
     vm.learningEnvList = [vm.unselectText, 'Inside', 'Outside', 'Individual', 'Small Group', 'Whole Class'];
     
-    vm.toolList = [vm.unselectText, 'American Geographical Society', 'GeoMakers', 'GeoPlunge', 'CrisisMappers', 'MapStory', 'TeachOSM', 'Open Geospatial Consortium'];
+    vm.toolList = [vm.unselectText];
+    
+    issuerService.getIssuers().success(function(data) {
+        angular.forEach(data, function(issu) {
+            console.log(issu);
+            vm.toolList.push(issu.name);
+        });
+    });
+    
+    
     
     vm.natGeoStandardList = [
         vm.unselectText,

@@ -12,6 +12,7 @@ var db = require('./config/db');
 var credlyRoutes = require('./routes/credly');
 var pathwayRoutes = require('./routes/pathways');
 var mailRoutes = require('./routes/mail');
+var issuerRoutes = require('./routes/issuers');
 
 var users = [
     {id: 1, username: 'creator', password: process.env.CREATOR_PASSWORD},
@@ -108,6 +109,9 @@ router.put('/api/credlybadge/:badge_id', credlyRoutes.updateBadge);
 router.get('/api/credlybadge/:badge_id', credlyRoutes.getBadge);
 router.get('/api/credlybadgebuilder', credlyRoutes.getBadgeBuilderURL);
 router.post('/api/credlybadge/claim', credlyRoutes.claimBadge);
+
+router.get('/api/issuers', issuerRoutes.getIssuers);
+router.post('/api/issuers', issuerRoutes.addIssuer);
 
 router.post('/app/mailto', mailRoutes.mailInfoTo);
 router.post('/app/mailmsg', mailRoutes.mailMessage);
